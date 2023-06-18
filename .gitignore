@@ -1,2 +1,3 @@
 node_modules
-chrome.config.js
+*.lnk
+*.priv.*
