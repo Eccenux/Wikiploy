@@ -1,0 +1,26 @@
+{
+	"name": "wikiploy",
+	"version": "1.0.0",
+	"description": "User scripts and gadgets deployment for MediaWiki (Wikipedia).",
+	"main": "Wiki_bot_test.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Eccenux/Wikiploy.git"
+	},
+	"keywords": [
+		"Mediawiki",
+		"Wikipedia",
+		"deploy",
+		"rollout",
+		"gadgets"
+	],
+	"author": "Maciej Nux Jaros",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Eccenux/Wikiploy/issues"
+	},
+	"homepage": "https://github.com/Eccenux/Wikiploy#readme"
+}
