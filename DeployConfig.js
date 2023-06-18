@@ -12,4 +12,10 @@ export default class DeployConfig {
 			this.dst = `~/${this.src}`;
 		}
 	}
+
+	/** info */
+	info() {
+		return `deploy "${this.src}" to "${this.dst}"`;
+	}
+
 }

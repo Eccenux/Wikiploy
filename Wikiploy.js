@@ -1,7 +1,9 @@
-import puppeteer, { Browser } from 'puppeteer'; // v13.0.0 or later
+import puppeteer, { Browser } from 'puppeteer'; // v13+
 
-import WikiOps from './WikiOps';
+import WikiOps from './WikiOps.js';
 import PageCache from './PageCache.js';
+
+import { promises as fs } from "fs";	// node v11+
 
 import {
 	wsBrowserPort,
@@ -34,12 +36,42 @@ export default class Wikiploy {
 
 	/**
 	 * Deploy scripts.
-	 * @param {Array} configs 
+	 * @param {DeployConfig[]} configs 
 	 */
 	async deploy(configs) {
-		const browser = this.init();
+		const bot = this._bot;
+		const browser = await this.init();
+		const page = await bot.openTab(browser);
+		console.log(JSON.stringify(configs));
+		// main loop
+		for (const config of configs) {
+			await this.save(config, page);
+		}
+		page.close();
 		console.log(`done`);
 		process.exit(0);
+	}
+
+	/**
+	 * Deploy script.
+	 * @param {DeployConfig} config Config.
+	 * @param {Page} page
+	 */
+	async save(config, page) {
+		console.log('[Wikiploy]', config.info());
+		const bot = this._bot;
+		let url = this.editUrl(config.dst);
+		await page.goto(url);
+
+		const contents = await fs.readFile(config.src, "text");
+		bot.changeInput(page, '#wpTextbox1', contents);
+
+		if (!this.mock) {
+			await bot.saveEdit(page);
+			console.log('saved');
+		} else {
+			await sleep(this.mockSleep);
+		}
 	}
 
 	/**

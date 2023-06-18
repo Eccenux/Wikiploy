@@ -1,6 +1,7 @@
 import {
 	scrollIntoViewIfNeeded,
 	waitForSelectors,
+	typeIntoElement,
 } from './chromeBase.js'
 
 import PageCache from './PageCache.js';
@@ -96,4 +97,16 @@ export default class WikiOps {
 		});
 		await nav; // wait for form submit
 	}
+
+	async changeInput(targetPage, selector, value) {
+		const timeout = 200;
+		const element = await waitForSelectors([
+			selector
+		], targetPage, {
+			timeout,
+			visible: true
+		});
+		typeIntoElement(element, value);
+	}
+	
 }
