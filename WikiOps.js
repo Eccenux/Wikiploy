@@ -1,7 +1,6 @@
 import {
 	scrollIntoViewIfNeeded,
 	waitForSelectors,
-	waitForElement,
 } from './chromeBase.js'
 
 import PageCache from './PageCache.js';
@@ -20,7 +19,7 @@ import PageCache from './PageCache.js';
 		}
 		page.close();
  */
-export default class WikiBot {
+export default class WikiOps {
 	/**
 	 * Init.
 	 * @param {PageCache} globalCache Cache for page resources.

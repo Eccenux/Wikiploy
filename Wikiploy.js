@@ -1,19 +1,21 @@
-/* global document, console, process */
-import puppeteer, { Browser, Page } from 'puppeteer'; // v13.0.0 or later
+import puppeteer, { Browser } from 'puppeteer'; // v13.0.0 or later
 
-import WikiBot from './WikiBot.js';
+import WikiOps from './WikiOps';
 import PageCache from './PageCache.js';
 
 import {
 	wsBrowserPort,
 } from './chrome.config.js'
 
+// eslint-disable-next-line no-unused-vars
 function sleep(sleepMs) {
 	return new Promise((resolve)=>{setTimeout(()=>resolve(), sleepMs)});
 }
 
 /**
  * MediaWiki deployment automation.
+ * 
+ * @property _browser {Browser} The user's email
  */
 export default class Wikiploy {
 	constructor() {
@@ -27,7 +29,7 @@ export default class Wikiploy {
 		this._browser = false;
 
 		/** Bot helper. */
-		this._bot = new WikiBot(this.cache);
+		this._bot = new WikiOps(this.cache);
 	}
 
 	/**
@@ -60,9 +62,13 @@ export default class Wikiploy {
 		return baseUrl + '?title=' + encodeURIComponent(pageTitle) + params;
 	}
 	
-	/** @private Init browser connection. */
+	/**
+	 * Init browser connection.
+	 * 
+	 * @returns {Browser} the browser API.
+	 */
 	async init() {
-		if (this._browser) {
+		if (this._browser instanceof Browser) {
 			return this._browser;
 		}
 
