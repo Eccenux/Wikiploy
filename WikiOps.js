@@ -126,5 +126,14 @@ export default class WikiOps {
 			input.value = value;
 		}, value);
 	}
+
+	/** Insert summary. */
+	async fillSummary(page, summary) {
+		await page.evaluate((summary) => {
+			let wpSummary = document.querySelector('#wpSummary');
+			wpSummary.value = summary;
+		}, summary);
+	}
+
 	
 }

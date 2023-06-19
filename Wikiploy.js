@@ -63,10 +63,12 @@ export default class Wikiploy {
 		// navigate
 		let url = this.editUrl(config.dst);
 		await bot.goto(page, url);
-		// put in file content
+		// insert the content of the file into the edit field
 		const contents = await fs.readFile(config.src, 'utf8');
 		await bot.fillEdit(page, contents);
-		// TODO: prepare edit desc.
+		// edit description
+		const summary = this.preapreSummary(config);
+		await bot.fillSummary(page, summary);
 
 		// save
 		if (!this.mock) {
@@ -75,6 +77,18 @@ export default class Wikiploy {
 		} else {
 			await sleep(this.mockSleep);
 		}
+	}
+
+
+	/**
+	 * Prepare edit summary.
+	 * 
+	 * @param {String} pageTitle Title with namespace.
+	 * @returns {String} Full edit URL.
+	 * @private
+	 */
+	preapreSummary(config) {
+		return '[Wikiploy]' + ` ${config.src}`;
 	}
 
 	/**
