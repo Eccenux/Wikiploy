@@ -60,12 +60,15 @@ export default class Wikiploy {
 	async save(config, page) {
 		console.log('[Wikiploy]', config.info());
 		const bot = this._bot;
+		// navigate
 		let url = this.editUrl(config.dst);
-		await page.goto(url);
+		await bot.goto(page, url);
+		// put in file content
+		const contents = await fs.readFile(config.src, 'utf8');
+		await bot.fillEdit(page, contents);
+		// TODO: prepare edit desc.
 
-		const contents = await fs.readFile(config.src, "text");
-		bot.changeInput(page, '#wpTextbox1', contents);
-
+		// save
 		if (!this.mock) {
 			await bot.saveEdit(page);
 			console.log('saved');

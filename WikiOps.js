@@ -1,7 +1,7 @@
 import {
 	scrollIntoViewIfNeeded,
+	waitForSelector,
 	waitForSelectors,
-	typeIntoElement,
 } from './chromeBase.js'
 
 import PageCache from './PageCache.js';
@@ -98,15 +98,33 @@ export default class WikiOps {
 		await nav; // wait for form submit
 	}
 
-	async changeInput(targetPage, selector, value) {
-		const timeout = 200;
-		const element = await waitForSelectors([
-			selector
-		], targetPage, {
+	/** Go to url (and wait for it). */
+	async goto(page, url) {
+		let nav = page.waitForNavigation(); // init wait
+		await page.goto(url);
+		await nav; // wait for url
+		await this.disarmUnloadWarning(page);
+	}
+
+	/** Change intput's value. */
+	async fillEdit(page, value) {
+		const timeout = 5000;
+		await waitForSelector('#editform', page, {
 			timeout,
-			visible: true
 		});
-		typeIntoElement(element, value);
+		// await changeElementValue(element, value);
+		await page.evaluate((value) => {
+			// remove editors (plain, WYSIWYG)
+			document.querySelectorAll('#editform textarea, .ace_editor').forEach(el=>el.remove());
+			// add plain textarea
+			document.querySelector('#editform').insertAdjacentHTML('afterbegin', `
+				<textarea id="wpTextbox1" name="wpTextbox1"
+				></textarea>
+			`);
+			// insert value
+			let input = document.querySelector('#wpTextbox1');
+			input.value = value;
+		}, value);
 	}
 	
 }

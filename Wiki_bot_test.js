@@ -4,7 +4,7 @@ import Wikiploy from './Wikiploy.js';
 const ployBot = new Wikiploy();
 // mock
 ployBot.mock = true;
-ployBot.mockSleep = 2_000;
+ployBot.mockSleep = 5_000;
 
 (async () => {
 	const config = new DeployConfig({
