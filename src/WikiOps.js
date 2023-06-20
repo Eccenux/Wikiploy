@@ -99,11 +99,13 @@ export default class WikiOps {
 	}
 
 	/** Go to url (and wait for it). */
-	async goto(page, url) {
+	async goto(page, url, skipDisarm) {
 		let nav = page.waitForNavigation(); // init wait
 		await page.goto(url);
 		await nav; // wait for url
-		await this.disarmUnloadWarning(page);
+		if (!skipDisarm) {
+			await this.disarmUnloadWarning(page);
+		}
 	}
 
 	/** Read current MW user. */

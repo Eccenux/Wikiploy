@@ -23,6 +23,10 @@ export default class DeployConfig {
 		}
 	}
 
+	/** Does this config require a user. */
+	needsUser() {
+		return this._dst ? true : false;
+	}
 	/** Setup user. */
 	setUser(userName) {
 		if (this._dst) {

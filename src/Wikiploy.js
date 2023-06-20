@@ -64,24 +64,18 @@ export default class Wikiploy {
 	async save(config, page) {
 		console.log('[Wikiploy]', config.info());
 		const bot = this._bot;
+		// prepare user
+		if (config.needsUser()) {
+			await this.prepareUser(config, page);
+		}
 		// navigate
 		let url = this.editUrl(config.dst, config);
 		await bot.goto(page, url);
-		// setup user
-		let userName = await bot.readUser(page);
-		if (!userName) {
-			throw 'Unable to read user name. Not authenticated?';
-		}
-		let changed = config.setUser(userName);
-		if (changed) {
-			url = this.editUrl(config.dst, config);
-			await bot.goto(page, url);
-		}
 		// insert the content of the file into the edit field
 		const contents = await fs.readFile(config.src, 'utf8');
 		await bot.fillEdit(page, contents);
 		// edit description
-		const summary = this.preapreSummary(config);
+		const summary = this.prepareSummary(config);
 		await bot.fillSummary(page, summary);
 
 		// save
@@ -93,16 +87,53 @@ export default class Wikiploy {
 		}
 	}
 
+	/**
+	 * Prepare user in config.
+	 * 
+	 * Note! Modifies the config.
+	 * 
+	 * @param {DeployConfig} config Config.
+	 * @param {Page} page
+	 * @private
+	 */
+	async prepareUser(config, page) {
+		const bot = this._bot;
+
+		let url = this.liteUrl(config);
+		await bot.goto(page, url, true);
+
+		let userName = await bot.readUser(page);
+		if (!userName) {
+			throw 'Unable to read user name. Not authenticated?';
+		}
+
+		let changed = config.setUser(userName);
+		return changed;
+	}
 
 	/**
 	 * Prepare edit summary.
 	 * 
-	 * @param {String} pageTitle Title with namespace.
-	 * @returns {String} Full edit URL.
+	 * @param {DeployConfig} config Config.
+	 * @returns {String} Edit summary.
 	 * @private
 	 */
-	preapreSummary(config) {
+	prepareSummary(config) {
 		return '[Wikiploy]' + ` ${config.src}`;
+	}
+
+	/**
+	 * Prepare base URL.
+	 * 
+	 * @param {DeployConfig} config Configuration.
+	 * @returns {String} Base URL.
+	 * @private
+	 */
+	baseUrl(config) {
+		const site = config.site.length ? config.site : this.site;
+		const origin = `https://${site}`;
+		const baseUrl = `${origin}/w/index.php`;
+		return baseUrl;
 	}
 
 	/**
@@ -114,9 +145,7 @@ export default class Wikiploy {
 	 * @private
 	 */
 	editUrl(pageTitle, config) {
-		const site = config.site.length ? config.site : this.site;
-		const origin = `https://${site}`;
-		const baseUrl = `${origin}/w/index.php`;
+		const baseUrl = this.baseUrl(config);
 
 		// common params
 		// note that submit action is not affected by new wikicode editor
@@ -128,6 +157,25 @@ export default class Wikiploy {
 		return baseUrl + '?title=' + encodeURIComponent(pageTitle) + params;
 	}
 	
+	/**
+	 * Prepare URL of some lite page.
+	 * 
+	 * @param {DeployConfig} config Configuration.
+	 * @returns {String} URL within Wiki.
+	 * @private
+	 */
+	liteUrl(config) {
+		const baseUrl = this.baseUrl(config);
+
+		// common params
+		// note that submit action is not affected by new wikicode editor
+		let params = `
+			&useskin=monobook
+		`.replace(/\s+/g, '');
+
+		return baseUrl + '?title=User:Nux/blank.js' + params;
+	}
+
 	/**
 	 * Init browser connection.
 	 * 
