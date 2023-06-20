@@ -9,11 +9,11 @@ const ployBot = new Wikiploy();
 (async () => {
 	const configs = [];
 	configs.push(new DeployConfig({
-		src: 'test.js',
+		src: 'assets/test.js',
 		dst: 'User:Nux/test-jsbot--test.js',
 	}));
 	configs.push(new DeployConfig({
-		src: 'test.css',
+		src: 'assets/test.css',
 		dst: 'User:Nux/test-jsbot--test.css',
 	}));
 	await ployBot.deploy(configs);

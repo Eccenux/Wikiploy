@@ -20,7 +20,7 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}\\Wiki_bot_test.js"
+			"program": "${workspaceFolder}\\src\\Wiki_bot_test.js"
 		}
 	]
 }
