@@ -67,6 +67,16 @@ export default class Wikiploy {
 		// navigate
 		let url = this.editUrl(config.dst, config);
 		await bot.goto(page, url);
+		// setup user
+		let userName = await bot.readUser(page);
+		if (!userName) {
+			throw 'Unable to read user name. Not authenticated?';
+		}
+		let changed = config.setUser(userName);
+		if (changed) {
+			url = this.editUrl(config.dst, config);
+			await bot.goto(page, url);
+		}
 		// insert the content of the file into the edit field
 		const contents = await fs.readFile(config.src, 'utf8');
 		await bot.fillEdit(page, contents);

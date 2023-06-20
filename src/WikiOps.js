@@ -106,6 +106,20 @@ export default class WikiOps {
 		await this.disarmUnloadWarning(page);
 	}
 
+	/** Read current MW user. */
+	async readUser(page) {
+		let user = await page.evaluate(() => {
+			return mw?.config?.get('wgUserName', '--');
+		});
+		if (!user) {
+			console.warn('problem reading user, too early?');
+		}
+		if (user === '--') {
+			user = false;
+		}
+		return user;
+	}
+
 	/** Change intput's value. */
 	async fillEdit(page, value) {
 		const timeout = 5000;

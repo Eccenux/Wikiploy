@@ -13,11 +13,23 @@ export default class DeployConfig {
 		if (!this.dst) {
 			this.dst = `~/${this.src}`;
 		}
+		if (this.dst.indexOf('~')===0) {
+			this._dst = this.dst;
+		}
 		/** Wiki site (domain). */
 		this.site = options?.site;
 		if (!this.site || typeof this.site != 'string') {
 			this.site = '';
 		}
+	}
+
+	/** Setup user. */
+	setUser(userName) {
+		if (this._dst) {
+			this.dst = this._dst.replace(/^~/, 'User:' + userName);
+			return true;
+		}
+		return false;
 	}
 
 	/** info. */
