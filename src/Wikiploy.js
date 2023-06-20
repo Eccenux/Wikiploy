@@ -2,6 +2,8 @@ import puppeteer, { Browser } from 'puppeteer'; // v13+
 
 import WikiOps from './WikiOps.js';
 import PageCache from './PageCache.js';
+// eslint-disable-next-line no-unused-vars
+import DeployConfig from './DeployConfig.js';
 
 import { promises as fs } from "fs";	// node v11+
 
@@ -26,11 +28,13 @@ export default class Wikiploy {
 		this.mock = false;
 		/** Wait before close [ms] (or you can set a breakpoint to check stuff). */
 		this.mockSleep = 0;
+		/** Default wiki site (domain). */
+		this.site = 'pl.wikipedia.org';
 
-		/** Browser connection. */
+		/** @private Browser connection. */
 		this._browser = false;
 
-		/** Bot helper. */
+		/** @private Bot helper. */
 		this._bot = new WikiOps(this.cache);
 	}
 
@@ -61,7 +65,7 @@ export default class Wikiploy {
 		console.log('[Wikiploy]', config.info());
 		const bot = this._bot;
 		// navigate
-		let url = this.editUrl(config.dst);
+		let url = this.editUrl(config.dst, config);
 		await bot.goto(page, url);
 		// insert the content of the file into the edit field
 		const contents = await fs.readFile(config.src, 'utf8');
@@ -95,11 +99,14 @@ export default class Wikiploy {
 	 * Prepare edit URL.
 	 * 
 	 * @param {String} pageTitle Title with namespace.
+	 * @param {DeployConfig} config Configuration.
 	 * @returns {String} Full edit URL.
 	 * @private
 	 */
-	editUrl(pageTitle) {
-		const baseUrl = `https://pl.wikipedia.org/w/index.php`;	// TODO: config/options
+	editUrl(pageTitle, config) {
+		const site = config.site.length ? config.site : this.site;
+		const origin = `https://${site}`;
+		const baseUrl = `${origin}/w/index.php`;
 
 		// common params
 		// note that submit action is not affected by new wikicode editor
