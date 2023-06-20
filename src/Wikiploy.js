@@ -36,6 +36,9 @@ export default class Wikiploy {
 
 		/** @private Bot helper. */
 		this._bot = new WikiOps(this.cache);
+
+		/** @private Users cache. */
+		this._users = {};
 	}
 
 	/**
@@ -46,7 +49,7 @@ export default class Wikiploy {
 		const bot = this._bot;
 		const browser = await this.init();
 		const page = await bot.openTab(browser);
-		console.log(JSON.stringify(configs));
+		// console.log(JSON.stringify(configs));
 		// main loop
 		for (const config of configs) {
 			await this.save(config, page);
@@ -99,14 +102,27 @@ export default class Wikiploy {
 	async prepareUser(config, page) {
 		const bot = this._bot;
 
+		let site = config.site;
+		// from cache
+		if (site in this._users) {
+			let changed = config.setUser(this._users[site]);
+			return changed;
+		}
+
+		// any page
 		let url = this.liteUrl(config);
 		await bot.goto(page, url, true);
 
+		// read
 		let userName = await bot.readUser(page);
 		if (!userName) {
 			throw 'Unable to read user name. Not authenticated?';
 		}
 
+		// save to cache
+		this._users[site] = userName;
+
+		// finalize
 		let changed = config.setUser(userName);
 		return changed;
 	}
