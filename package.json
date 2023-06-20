@@ -1,6 +1,6 @@
 {
 	"name": "wikiploy",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "User scripts and gadgets deployment for MediaWiki (Wikipedia).",
 	"main": "src/index.js",
 	"type": "module",
