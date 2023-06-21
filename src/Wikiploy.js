@@ -135,7 +135,7 @@ export default class Wikiploy {
 	 * @private
 	 */
 	prepareSummary(config) {
-		return '[Wikiploy]' + ` ${config.src}`;
+		return '#Wikiploy' + ` ${config.src}`;
 	}
 
 	/**
