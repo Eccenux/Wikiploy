@@ -21,6 +21,21 @@ export default class DeployConfig {
 		if (!this.site || typeof this.site != 'string') {
 			this.site = '';
 		}
+		/**
+		 * Custom summary (per file).
+		 * 
+		 * This can either be a string or a function.
+		 * 
+		 * Note that you can also set a global summary (for the whole wikiploy).
+		 * Empty summary will fallback to global summary rules.
+		 */
+		this.summary = options?.summary;
+		if (typeof this.summary === 'string' && this.summary.length) {
+			this.summary = () => options.summary;
+		}
+		if (typeof this.summary != 'function') {
+			this.summary = false;
+		}
 	}
 
 	/** Does this config require a user. */

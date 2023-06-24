@@ -75,4 +75,44 @@ describe('DeployConfig', function () {
 			assert.equal(result.dst, config.dst);
 		});
 	});
+
+	describe('summary', function () {
+		it('should use string', function () {
+			let expected = 'v1.1';
+			let config = {
+				src: 'test.js',
+				summary: expected,
+			};
+			let result = new DeployConfig(config);
+			console.log(result);
+			assert.equal(result.summary(), expected);
+		});
+		it('should use function', function () {
+			let expected = 'v1.1: test.js';
+			let config = {
+				src: 'test.js',
+				summary: function() { return `v1.1: ${this.src}`; },
+			};
+			let result = new DeployConfig(config);
+			console.log(result);
+			assert.equal(result.summary(), expected);
+		});
+		it('should default to false', function () {
+			let config = {
+				src: 'test.js',
+			};
+			let result = new DeployConfig(config);
+			console.log(result);
+			assert.equal(result.summary, false);
+		});
+		it('empty should be ignored', function () {
+			let config = {
+				src: 'test.js',
+				summary: '',
+			};
+			let result = new DeployConfig(config);
+			console.log(result);
+			assert.equal(result.summary, false);
+		});
+	});
 });

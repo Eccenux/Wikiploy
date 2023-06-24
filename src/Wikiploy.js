@@ -135,7 +135,8 @@ export default class Wikiploy {
 	 * @private
 	 */
 	prepareSummary(config) {
-		return `#Wikiploy ${this.summary(config)}`;
+		let summary = typeof config.summary === 'function' ? config.summary() : this.summary(config);
+		return `#Wikiploy ${summary}`;
 	}
 
 	/**
