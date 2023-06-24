@@ -135,7 +135,20 @@ export default class Wikiploy {
 	 * @private
 	 */
 	prepareSummary(config) {
-		return '#Wikiploy' + ` ${config.src}`;
+		return `#Wikiploy ${this.summary(config)}`;
+	}
+
+	/**
+	 * Custom summary.
+	 * 
+	 * This can be e.g. version number and short, text summary.
+	 * You can use config to add e.g. file name too (which is default).
+	 * 
+	 * @param {DeployConfig} config Deployment configuration object.
+	 * @returns {String} Summary added to saved edits.
+	 */
+	summary(config) {
+		return config.src;
 	}
 
 	/**
