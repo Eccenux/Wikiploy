@@ -20,6 +20,11 @@ import {DeployConfig, Wikiploy} from 'wikiploy';
 
 const ployBot = new Wikiploy();
 
+// custom summary
+ployBot.summary = () => {
+	return 'v2.7.0: adding new test mode';
+}
+
 // run asynchronusly to be able to wait for results
 (async () => {
 	const configs = [];
