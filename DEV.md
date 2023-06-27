@@ -5,9 +5,9 @@ Wikiploy is a Node.js project and is configured to use VSCode for development.
 
 ## Prepararion
 
-### Install Node
-Obviously you'll need [Node.JS](https://nodejs.org/en).
-Node 12+ should be fine, but I would probably recommend latest LTS version.
+### Install Nodejs
+Obviously you'll need [Node.js](https://nodejs.org/en).
+Node 14+ should be fine for Wikiploy alone, but Puppeteer has certain expectations and 16+ is a better choice. In any case, I would recommend using the latest LTS version of Node.
 
 Note that you can use [NVM-windows](https://github.com/coreybutler/nvm-windows) if you need multiple Node.js versions installed on Windows.
 
