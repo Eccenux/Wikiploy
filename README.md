@@ -13,6 +13,7 @@ Rollout your JS, CSS etc from your git repository to as many MW wikis as you nee
 This is using [Puppeteer](https://pptr.dev/) to control [Chrome Canary](https://www.google.com/chrome/canary/) or similar. You just open Chrome with remote debug enabled and run a script. The idea is that you are logged in in Chrome and so all edits are still your edits. You can keep the Canary running in the background when you are changing and deploying more stuff.
 
 Wikiploy will also work with other Chromium based browser. [Instructions for enabling remote debug in MS Edge](https://learn.microsoft.com/en-us/microsoft-edge/devtools-protocol-chromium/).
+Note that to completely close Edge you might need use settings: Continue running in background when Microsoft Edge is closed (pl. *Kontynuuj działanie aplikacji i rozszerzeń w tle po zamknięciu przeglądarki Microsoft Edge*).
 
 ## Basic script and dst
 ```js
