@@ -2,4 +2,7 @@
 .yadda.yadda.yadda {
 	content: 'bla, bla, bla';
 }
-.something {}
+.something {
+	display: block;
+}
+/* puppeteer 20.7.x */
