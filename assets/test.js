@@ -1,3 +1,3 @@
 // test.js
 console.log('test');
-// puppeteer 20.7.x
+// puppeteer 20.8.x

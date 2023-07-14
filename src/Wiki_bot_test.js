@@ -16,16 +16,16 @@ const ployBot = new Wikiploy();
 		src: 'assets/test.css',
 		dst: '~/test-jsbot--test.css',
 	}));
-	// configs.push(new DeployConfig({
-	// 	src: 'assets/test.js',
-	// 	dst: '~/test-jsbot--test.js',
-	// 	site: 'en.wikipedia.org',
-	// }));
-	// configs.push(new DeployConfig({
-	// 	src: 'assets/test.css',
-	// 	dst: '~/test-jsbot--test.css',
-	// 	site: 'en.wikipedia.org',
-	// }));
+	configs.push(new DeployConfig({
+		src: 'assets/test.js',
+		dst: '~/test-jsbot--test.js',
+		site: 'en.wikipedia.org',
+	}));
+	configs.push(new DeployConfig({
+		src: 'assets/test.css',
+		dst: '~/test-jsbot--test.css',
+		site: 'en.wikipedia.org',
+	}));
 	await ployBot.deploy(configs);
 })().catch(err => {
 	console.error(err);

@@ -38,7 +38,7 @@ export default class WikiOps {
 		await this.initViewport(page);
 		await this.cache.enable(page);
 		await this.disarmUnloadWarning(page);
-		const timeout = 5000;
+		const timeout = 7000;
 		page.setDefaultTimeout(timeout);
 		return page;
 	}
@@ -124,7 +124,7 @@ export default class WikiOps {
 
 	/** Change intput's value. */
 	async fillEdit(page, value) {
-		const timeout = 5000;
+		const timeout = 14000;
 		await waitForSelector('#editform', page, {
 			timeout,
 		});
