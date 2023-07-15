@@ -1,5 +1,6 @@
 import puppeteer, { Browser } from 'puppeteer'; // v13+
 
+import WikiployBase from './WikiployBase .js';
 import WikiOps from './WikiOps.js';
 import PageCache from './PageCache.js';
 // eslint-disable-next-line no-unused-vars
@@ -18,18 +19,18 @@ function sleep(sleepMs) {
 
 /**
  * MediaWiki deployment automation.
+ * Deploy scripts with a browser (puppetter).
  * 
- * @property _browser {Browser} The user's email
+ * @property _browser {Browser} Browser connection.
  */
-export default class Wikiploy {
+export default class Wikiploy extends WikiployBase {
 	constructor() {
+		super();
+
 		this.cache = new PageCache();
-		/** Disable save. */
-		this.mock = false;
+
 		/** Wait before close [ms] (or you can set a breakpoint to check stuff). */
 		this.mockSleep = 0;
-		/** Default wiki site (domain). */
-		this.site = 'pl.wikipedia.org';
 
 		/** @private Browser connection. */
 		this._browser = false;
@@ -42,10 +43,12 @@ export default class Wikiploy {
 	}
 
 	/**
-	 * Deploy scripts.
+	 * Deploy scripts with a browser (puppetter).
 	 * @param {DeployConfig[]} configs 
 	 */
 	async deploy(configs) {
+		console.log('[Wikiploy] deploy %d configs (default site: %s)...\n', configs.length, this.site);
+
 		const bot = this._bot;
 		const browser = await this.init();
 		const page = await bot.openTab(browser);
@@ -102,7 +105,7 @@ export default class Wikiploy {
 	async prepareUser(config, page) {
 		const bot = this._bot;
 
-		let site = config.site;
+		const site = this.getSite(config);
 		// from cache
 		if (site in this._users) {
 			let changed = config.setUser(this._users[site]);
@@ -128,31 +131,6 @@ export default class Wikiploy {
 	}
 
 	/**
-	 * Prepare edit summary.
-	 * 
-	 * @param {DeployConfig} config Config.
-	 * @returns {String} Edit summary.
-	 * @private
-	 */
-	prepareSummary(config) {
-		let summary = typeof config.summary === 'function' ? config.summary() : this.summary(config);
-		return `#Wikiploy ${summary}`;
-	}
-
-	/**
-	 * Custom summary.
-	 * 
-	 * This can be e.g. version number and short, text summary.
-	 * You can use config to add e.g. file name too (which is default).
-	 * 
-	 * @param {DeployConfig} config Deployment configuration object.
-	 * @returns {String} Summary added to saved edits.
-	 */
-	summary(config) {
-		return config.src;
-	}
-
-	/**
 	 * Prepare base URL.
 	 * 
 	 * @param {DeployConfig} config Configuration.
@@ -160,7 +138,7 @@ export default class Wikiploy {
 	 * @private
 	 */
 	baseUrl(config) {
-		const site = config.site.length ? config.site : this.site;
+		const site = this.getSite(config);
 		const origin = `https://${site}`;
 		const baseUrl = `${origin}/w/index.php`;
 		return baseUrl;

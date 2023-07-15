@@ -53,7 +53,7 @@ export default class DeployConfig {
 
 	/** info. */
 	info() {
-		return `deploy "${this.src}" to "${this.dst}"`;
+		return `deploy "${this.src}" to "${this.dst}"` + (!this.site.length ? '' :  ` (to ${this.site})`);
 	}
 
 }
