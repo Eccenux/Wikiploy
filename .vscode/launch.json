@@ -7,20 +7,20 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Deploy test.js",
-			"skipFiles": [
-				"<node_internals>/**"
-			],
-			"program": "${workspaceFolder}\\src\\Wiki_bot_test.js"
-		},
-		{
-			"type": "node",
-			"request": "launch",
 			"name": "Run current JS",
 			"skipFiles": [
 				"<node_internals>/**"
 			],
 			"program": "${workspaceFolder}\\${file}"
-		}
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "ploy-lite test.js",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}\\src\\ploy_test_lite.js"
+		},
 	]
 }
