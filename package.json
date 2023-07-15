@@ -25,7 +25,7 @@
 	},
 	"homepage": "https://github.com/Eccenux/Wikiploy#readme",
 	"dependencies": {
-		"mwn": "^1.11.5",
+		"mwn": "1.11.x",
 		"puppeteer": "20.8.x"
 	},
 	"devDependencies": {

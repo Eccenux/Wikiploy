@@ -25,6 +25,11 @@ const ployBot = new WikiployLite(botpass);
 		src: 'assets/test.css',
 		dst: '~/test-wikiploylite--test.css',
 	}));
+	configs.push(new DeployConfig({
+		src: 'assets/test.css',
+		dst: '~/test-wikiploylite--test.css',
+		site: 'en.wikipedia.org',
+	}));
 	await ployBot.deploy(configs);
 
 	// check bots
