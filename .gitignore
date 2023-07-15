@@ -1,3 +1,4 @@
 node_modules
 *.lnk
 *.priv.*
+bot.config.js

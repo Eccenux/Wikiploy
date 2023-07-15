@@ -16,7 +16,7 @@ Run first `npm i`.
 You might want to run `npm up` to update some scripts too.
 
 Recomended global modules/tools:
-```
+```bash
 npm install -g eslint
 npm install -g mocha
 ```
@@ -36,13 +36,13 @@ You can also run (and debug) each test case directly from a test file. You might
 ## Publishing
 
 Step. 1. Check.
-```
+```bash
 npm test
 ```
 Step. 2. Change version in the package.
 
 Step. 3. Final commands.
-```
+```bash
 npm up
 npm test
 npm publish
