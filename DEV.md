@@ -37,6 +37,7 @@ You can also run (and debug) each test case directly from a test file. You might
 
 Step. 1. Check.
 ```bash
+npm up
 npm test
 ```
 Step. 2. Change version in the package.
