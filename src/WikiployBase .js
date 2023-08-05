@@ -30,7 +30,7 @@ export default class WikiployBase {
 	 */
 	prepareSummary(config) {
 		let summary = typeof config.summary === 'function' ? config.summary() : this.summary(config);
-		return `#Wikiploy ${summary}`;
+		return `${summary} • [[en:WP:Wikiploy|Wikiploy]]`;
 	}
 
 	/** @private Get site for a config. */

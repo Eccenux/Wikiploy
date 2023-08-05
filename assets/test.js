@@ -1,3 +1,8 @@
+/**
+ * Wikiploy example.
+ * 
+ * Deployed with love using Wikiploy: [[Wikipedia:Wikiploy]]
+ */
 // test.js
 console.log('test');
-// puppeteer 20.8.x xor mwn 1.11.x
+/* puppeteer 21.0.x xor mwn 1.11.x */

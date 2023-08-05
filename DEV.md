@@ -40,6 +40,13 @@ Step. 1. Check.
 npm up
 npm test
 ```
+If updating Puppeteer, the also:
+ - Change `assets/test.js` and/or css.
+ - Run `src/ploy_test_full.js`.
+If updating MWN, the also:
+ - Change `assets/test.js` and/or css.
+ - Run `src/ploy_test_lite.js`.
+
 Step. 2. Change version in the package.
 
 Step. 3. Final commands.

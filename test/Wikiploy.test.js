@@ -6,7 +6,7 @@ import DeployConfig from '../src/DeployConfig.js';
 describe('Wikiploy', function () {
 	
 	describe('summary', function () {
-		let tag = '#Wikiploy';
+		let tag = '• [[en:WP:Wikiploy|Wikiploy]]';
 		function prepareSummary(ployBot, configDef) {
 			const config = new DeployConfig(configDef);
 			console.log({config, summary:config.summary?config.summary():'NN'});
@@ -16,7 +16,7 @@ describe('Wikiploy', function () {
 
 		it('should use config string', function () {
 			let version = 'v1.1';
-			let expected = tag + ' ' + version;
+			let expected = version + ' ' + tag;
 			const ployBot = new Wikiploy();
 			const summary = prepareSummary(ployBot, {
 				src: 'test.js',
@@ -26,7 +26,7 @@ describe('Wikiploy', function () {
 		});
 		it('should use config function', function () {
 			let version = 'v1.2';
-			let expected = tag + ' ' + version;
+			let expected = version + ' ' + tag;
 			const ployBot = new Wikiploy();
 			const summary = prepareSummary(ployBot, {
 				src: 'test.js',
@@ -36,7 +36,7 @@ describe('Wikiploy', function () {
 		});
 		it('should use global function', function () {
 			let version = 'v1.3';
-			let expected = tag + ' ' + version;
+			let expected = version + ' ' + tag;
 			const ployBot = new Wikiploy();
 			ployBot.summary = () => version;
 			const summary = prepareSummary(ployBot, {
