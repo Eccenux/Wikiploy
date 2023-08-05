@@ -37,6 +37,7 @@ You can also run (and debug) each test case directly from a test file. You might
 
 Step. 1. Check.
 ```bash
+git pull
 npm up
 npm test
 ```
