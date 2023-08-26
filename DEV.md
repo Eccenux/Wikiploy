@@ -35,24 +35,21 @@ You can also run (and debug) each test case directly from a test file. You might
 
 ## Publishing
 
-Step. 1. Check.
+Step 1. Check and update versions.
 ```bash
-git pull
-npm up
-npm test
+php ./check_up.php
 ```
-If updating Puppeteer, the also:
- - Change `assets/test.js` and/or css.
- - Run `src/ploy_test_full.js`.
-If updating MWN, the also:
- - Change `assets/test.js` and/or css.
- - Run `src/ploy_test_lite.js`.
 
-Step. 2. Change version in the package.
+Step 2a. Test Puppeteer.
+ - Open *Chrome Canary* in *debug* mode.
+ - Run `ploy_test_full.js`.
 
-Step. 3. Final commands.
+Step 2b. Test MWN:
+ - Run `ploy_test_lite.js`.
+
+Step 3. Final commands.
 ```bash
-npm up
+# npm up
 npm test
 npm publish
 ```

@@ -1,0 +1,25 @@
+// Requires `gsppvo.vscode-commandbar`.
+// Also: in settings (UI), `files.associations`, add `commandbar.json: jsonc` (json with comments).
+{
+	"skipTerminateQuickPick": true,
+	"skipSwitchToOutput": false,
+	"skipErrorMessage": true,
+	"commands": [
+		{
+			"text": "test",
+			"tooltip": "Run mocha tests.",
+			"color": "lightgreen",
+			"commandType": "script",
+			"command": "test",
+			"priority": 0
+		},
+		{
+			"text": "check_up",
+			"tooltip": "Check update of main deps.",
+			"color": "lightgreen",
+			"commandType": "exec",
+			"command": "php ./check_up.php",
+			"priority": 0
+		}
+	]
+}

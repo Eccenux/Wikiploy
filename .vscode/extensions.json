@@ -1,5 +1,6 @@
 {
 	"recommendations": [
+		"gsppvo.vscode-commandbar",
 		"hbenl.vscode-test-explorer",
 		"hbenl.vscode-mocha-test-adapter"
 	]

@@ -5,4 +5,4 @@
  */
 // test.js
 console.log('test');
-/* puppeteer 21.1.x xor mwn 1.11.x */
+/* puppeteer 21.1.0 xor mwn 1.11.5 */

@@ -14,6 +14,24 @@
 			"program": "${workspaceFolder}\\${file}"
 		},
 		{
+			"name": "Run current PHP",
+			"type": "php",
+			"request": "launch",
+			"program": "${file}",
+			"cwd": "${fileDirname}",
+			"externalConsole": false,
+			"port": 9003
+		},
+		{
+			"name": "Run check_up",
+			"type": "php",
+			"request": "launch",
+			"program": "${workspaceFolder}\\check_up.php",
+			"cwd": "${workspaceFolder}",
+			"externalConsole": false,
+			"port": 9003
+		},
+		{
 			"type": "node",
 			"request": "launch",
 			"name": "ploy-lite test.js",
