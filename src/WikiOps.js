@@ -77,7 +77,7 @@ export default class WikiOps {
 
 	/** Save. */
 	async saveEdit(targetPage) {
-		const timeout = 200;
+		const timeout = 500;
 
 		await scrollIntoViewIfNeeded([
 			'#wpSave'
