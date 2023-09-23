@@ -1,4 +1,4 @@
-import { mwn as Mwn } from 'mwn';
+import { Mwn } from 'mwn';
 
 import WikiployBase from './WikiployBase .js';
 // eslint-disable-next-line no-unused-vars

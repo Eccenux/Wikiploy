@@ -1,7 +1,7 @@
 // import DeployConfig from './DeployConfig.js';
 // import Wikiploy from './Wikiploy.js';
 
-import { mwn as Mwn } from 'mwn';
+import { Mwn } from 'mwn';
 
 import * as ver from './version.js';
 
