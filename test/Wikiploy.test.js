@@ -45,4 +45,31 @@ describe('Wikiploy', function () {
 			assert.equal(summary, expected);
 		});
 	});
+
+	describe('prepareFile', function () {
+		const ployBot = new Wikiploy();
+		function prepareFile(contents, configDef) {
+			const config = new DeployConfig(configDef);
+			let result = ployBot.prepareFile(config, contents);
+			return result;
+		}
+
+		it('should default to no change', function () {
+			let file = 'abc def';
+			let expected = file;
+			const result = prepareFile(file, {
+				src: 'test.js',
+			});
+			assert.equal(result, expected);
+		});
+		it('should add nowiki to js', function () {
+			let file = 'abc def';
+			let expected = '// <nowiki>\nabc def\n// </nowiki>';
+			const result = prepareFile(file, {
+				src: 'test.js',
+				nowiki: true,
+			});
+			assert.equal(result, expected);
+		});
+	});
 });

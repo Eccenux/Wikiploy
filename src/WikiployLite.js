@@ -79,7 +79,7 @@ export default class WikiployLite extends WikiployBase {
 		// page
 		const pageTitle = config.dst;
 		// content of the file
-		const contents = await fs.readFile(config.src, 'utf8');
+		const contents = this.prepareFile(config, await fs.readFile(config.src, 'utf8'));
 		// edit description
 		const summary = this.prepareSummary(config);
 

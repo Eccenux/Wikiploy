@@ -15,11 +15,13 @@ const ployBot = new WikiployLite(botpass);
 	configs.push(new DeployConfig({
 		src: 'assets/test.js',
 		dst: '~/test-wikiploylite--test.js',
+		nowiki: true,
 	}));
 	configs.push(new DeployConfig({
 		src: 'assets/test.js',
 		dst: '~/test-wikiploylite--test.js',
 		site: 'en.wikipedia.org',
+		nowiki: true,
 	}));
 	configs.push(new DeployConfig({
 		src: 'assets/test.css',

@@ -21,6 +21,8 @@ export default class DeployConfig {
 		if (!this.site || typeof this.site != 'string') {
 			this.site = '';
 		}
+		/** Add nowiki tag around code (false by default). */
+		this.nowiki = options?.nowiki;
 		/**
 		 * Custom summary (per file).
 		 * 

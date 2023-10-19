@@ -11,6 +11,7 @@ const ployBot = new Wikiploy();
 	configs.push(new DeployConfig({
 		src: 'assets/test.js',
 		dst: '~/test-jsbot--test.js',
+		nowiki: true,
 	}));
 	configs.push(new DeployConfig({
 		src: 'assets/test.css',
@@ -20,6 +21,7 @@ const ployBot = new Wikiploy();
 		src: 'assets/test.js',
 		dst: '~/test-jsbot--test.js',
 		site: 'en.wikipedia.org',
+		nowiki: true,
 	}));
 	configs.push(new DeployConfig({
 		src: 'assets/test.css',

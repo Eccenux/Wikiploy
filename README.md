@@ -10,6 +10,16 @@ Wikiploy
 User scripts and gadgets deployment for wikis (Wikipedia or more generally MediaWiki based wiki).
 Rollout your JS, CSS etc from your git repository to as many MW wikis as you need.
 
+## New options
+
+### nowiki (v1.7)
+
+Note! It is recomended that you use `nowiki: true` for all JS files. The `nowiki` property is a new option in `DeployConfig` since Wikiploy v1.7.
+
+JavaScript page is still a wiki page... Kind of. It can be added to a category or link to other pages. To avoid this use the nowiki option.
+
+Don't add this option to CSS though. It won't work correctly.
+
 ### Wikiploy full
 
 This is using [Puppeteer](https://pptr.dev/) to control [Chrome Canary](https://www.google.com/chrome/canary/) or similar. You just open Chrome with remote debug enabled and run a script. The idea is that you are logged in in Chrome and so all edits are still your edits. You can keep the Canary running in the background when you are changing and deploying more stuff. 
@@ -63,6 +73,7 @@ ployBot.summary = () => {
 	configs.push(new DeployConfig({
 		src: 'test.js',
 		dst: '~/test-wikiploy--test.js',
+		nowiki: true,
 	}));
 	await ployBot.deploy(configs);
 })().catch(err => {

@@ -78,7 +78,7 @@ export default class Wikiploy extends WikiployBase {
 		let url = this.editUrl(config.dst, config);
 		await bot.goto(page, url);
 		// insert the content of the file into the edit field
-		const contents = await fs.readFile(config.src, 'utf8');
+		const contents = this.prepareFile(config, await fs.readFile(config.src, 'utf8'));
 		await bot.fillEdit(page, contents);
 		// edit description
 		const summary = this.prepareSummary(config);

@@ -33,6 +33,24 @@ export default class WikiployBase {
 		return `${summary} • [[en:WP:Wikiploy|Wikiploy]]`;
 	}
 
+	/**
+	 * Prepare a text file for wiki.
+	 * 
+	 * @param {DeployConfig} config Config.
+	 * @param {String} contents Text file.
+	 * @returns {String} Edit summary.
+	 * @private
+	 */
+	prepareFile(config, contents) {
+		if (config.nowiki) {
+			// if (config.src.search(/\.js$/) > 0) {
+			// }
+			contents = '// <nowiki>\n' + contents + '\n// </nowiki>';
+		}
+		
+		return contents;
+	}
+
 	/** @private Get site for a config. */
 	getSite(config) {
 		let site = config.site.length ? config.site : this.site;
