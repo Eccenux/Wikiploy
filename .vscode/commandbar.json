@@ -9,7 +9,7 @@
 		{
 			"text": "test",
 			"tooltip": "Run mocha tests.",
-			"color": "green",
+			"color": "lightgreen",
 			"commandType": "palette",
 			"command": "workbench.action.tasks.runTask|Run tests",
 			"priority": 0
@@ -18,7 +18,7 @@
 		{
 			"text": "npm i",
 			"tooltip": "NPM install.",
-			"color": "orange",
+			"color": "moccasin",
 			"commandType": "palette",
 			"command": "workbench.action.tasks.runTask|npm install",
 			"priority": 0
@@ -26,7 +26,7 @@
 		{
 			"text": "check_up",
 			"tooltip": "Check update of main deps.",
-			"color": "orange",
+			"color": "moccasin",
 			"commandType": "exec",
 			"command": "php ./check_up.php",
 			"priority": 0
