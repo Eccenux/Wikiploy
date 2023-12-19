@@ -24,7 +24,7 @@ Your `package.json` (crucial part being `scripts`):
 		"build": "browserify src/main.js -o dist/yourGadetName.js",
 		"deploy-dev": "node wikiploy-dev.mjs",
 		"deploy": "node wikiploy.mjs",
-		"rollout-dev": "npm run build && npm run deploy-dev"
+		"rollout-dev": "npm run build && npm run deploy-dev",
 		"rollout": "npm run build && npm run deploy"
 	},
 	"devDependencies": {
