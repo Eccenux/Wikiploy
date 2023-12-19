@@ -495,6 +495,14 @@ yourClassyGadgetName [ResourceLoader | requiresES6 | dependencies = mediawiki.ut
 
 Example `MyGadget.js` with a link in the toolbar:
 ```js
+/**
+ * Wikiploy gadget example.
+ * 
+ * History and docs:
+ * https://github.com/Eccenux/wikiploy-rollout-example
+ * 
+ * Deployed using: [[Wikipedia:Wikiploy]]
+ */
 class MyGadget {
 	constructor() {
 		this.options = {
@@ -510,9 +518,9 @@ class MyGadget {
 			var linkLabel = 'My gadget dialog';
 			var itemId = 'some-unique-gadget-tool';
 			var item = mw.util.addPortletLink(portletId, '#', linkLabel, itemId);
-			$(item).on('click', function (evt) {
+			$(item).on('click', (evt) => {
 				evt.preventDefault();
-				gadget.openDialog();
+				this.openDialog();
 			});
 		}
 	}
