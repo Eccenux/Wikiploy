@@ -8,26 +8,26 @@ Wikiploy
 ## English description
 
 User scripts and gadgets deployment for wikis (Wikipedia or more generally MediaWiki based wiki).
-Rollout your JS, CSS etc from your git repository to as many MW wikis as you need.
+Roll-out your JS, CSS etc from your git repository to as many MW wikis as you need.
 
 ## New options
 
 ### nowiki (v1.7)
 
-Note! It is recomended that you use `nowiki: true` for all JS files. The `nowiki` property is a new option in `DeployConfig` since Wikiploy v1.7.
+Note! It is recommended that you use `nowiki: true` for all JS files. The `nowiki` property is a new option in `DeployConfig` since Wikiploy v1.7.
 
 JavaScript page is still a wiki page... Kind of. It can be added to a category or link to other pages. To avoid this use the nowiki option.
 
 Don't add this option to CSS though. It won't work correctly.
 
-### Wikiploy full
+### Wikiploy full (deprecated)
 
 This is using [Puppeteer](https://pptr.dev/) to control [Chrome Canary](https://www.google.com/chrome/canary/) or similar. You just open Chrome with remote debug enabled and run a script. The idea is that you are logged in in Chrome and so all edits are still your edits. You can keep the Canary running in the background when you are changing and deploying more stuff. 
 
 Wikiploy will also work with other Chromium based browser. [Instructions for enabling remote debug in MS Edge](https://learn.microsoft.com/en-us/microsoft-edge/devtools-protocol-chromium/).
 Note that to completely close Edge you might need use settings: Continue running in background when Microsoft Edge is closed (pl. *Kontynuuj działanie aplikacji i rozszerzeń w tle po zamknięciu przeglądarki Microsoft Edge*).
 
-### WikiployLite
+### WikiployLite (recommended)
 
 The `WikiployLite` class is using a bot API to deploy scripts. You can use standard `Wikiploy` and `WikiployLite` interchangeably. The `DeployConfig` is the same. WikiployLite is recommended as long as you can use it.
 
@@ -50,25 +50,26 @@ bot.config.js
 
 ## Basic script and dst
 ```js
-import {DeployConfig, Wikiploy, WikiployLite, verlib} from 'wikiploy';
+import {DeployConfig, WikiployLite, userPrompt} from 'wikiploy';
 
-// full
-//const ployBot = new Wikiploy();
-// lite
 import * as botpass from './bot.config.js';
 const ployBot = new WikiployLite(botpass);
 
-// extra if you want to read your version from the package.json
-const version = await verlib.readVersion('./package.json');
-
-// custom summary
-ployBot.summary = () => {
-	//return 'v2.7.0: adding new test mode';
-	return `v${version}: adding new test mode`;
-}
+// default site for DeployConfig
+ployBot.site = "en.wikipedia.org";
 
 // run asynchronously to be able to wait for results
 (async () => {
+	// Note! The `userPrompt` requires an interactive terminal.
+	// In VSC you can use tasks to get an interactive terminal and still run wikiploy from your commandbar.
+	const summary = await userPrompt('Summary of changes (empty for default summary):');
+	if (typeof summary === 'string' && summary.length) {
+		ployBot.summary = () => {
+			return summary;
+		}
+	}
+
+	// push out file(s) to wiki
 	const configs = [];
 	configs.push(new DeployConfig({
 		src: 'test.js',
