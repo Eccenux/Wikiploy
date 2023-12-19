@@ -21,7 +21,9 @@ Your `package.json` (crucial part being `scripts`):
 	"type": "commonjs",
 	"scripts": {
 		"test": "mocha",
-		"build": "browserify src/main.js -o dist/yourGadgetName.js && node -e \"console.log('Build done');\" ",
+		"build-less": "lessc src/less/main.less dist/yourGadgetName.css",
+		"build-js": "browserify src/main.js -o dist/yourGadgetName.js",
+		"build": "npm run build-less && npm run build-js && node -e \"console.log('Build done');\" ",
 		"deploy-dev": "node wikiploy-dev.mjs",
 		"deploy": "node wikiploy.mjs",
 		"rollout-dev": "npm run build && npm run deploy-dev",
@@ -31,6 +33,7 @@ Your `package.json` (crucial part being `scripts`):
 		"browserify": "17.x",
 		"chai": "4.x",
 		"eslint": "8.x",
+		"less": "4.x",
 		"mocha": "10.x"
 	},
 	"dependencies": {
@@ -62,6 +65,22 @@ function MyGadget() {
 }
 
 module.exports = { MyGadget };
+```
+
+Also should also create a starting point for your CSS `src/less/main.less`:
+```css
+@primary-color: darken(#3498db, 10%);
+@secondary-color: darken(#e74c3c, 20%);
+
+.yourGadgetName {
+    background-color: @primary-color;
+    color: white;
+
+	.header {
+		background-color: @secondary-color;
+		text-align: center;
+	}
+}
 ```
 
 Remember to install tools after changing `package.json`:
