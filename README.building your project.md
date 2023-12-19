@@ -369,22 +369,22 @@ In your main deployment script you could have something like (`wikiploy.mjs`):
 ```
 The script doesn't have any limits. However, you do need interface-admin rights to deploy to the `MediaWiki:Gadget-` namespace. So, you might need to use `~/` to deploy to your user-space.
 
-### Deploying in your user space
+### Release version in your user space
 
 **If you do *not* have interface-admin rights**, the functions could look like this:
 
 ```js
 export function addConfig(configs, site, isRelease) {
-	let deploymentName = isRelease ? '~/yourGadgetName.js' ? '~/yourGadgetName-dev.js';
+	let deploymentName = isRelease ? '~/yourGadgetName' : '~/yourGadgetName-dev';
 	configs.push(new DeployConfig({
 		src: 'dist/yourGadgetName.js',
-		dst: '~/yourGadgetName.js',
+		dst: `${deploymentName}.js`,
 		site,
 		nowiki: true,
 	}));
 	configs.push(new DeployConfig({
 		src: 'dist/yourGadgetName.css',
-		dst: '~/yourGadgetName.css',
+		dst: `${deploymentName}.css`,
 		site,
 	}));
 }
@@ -393,7 +393,7 @@ export function addConfigRelease(configs, site) {
 }
 ```
 
-In this case, you have both dev and release versions in your user space. Frankly, this might be the best choice, even if you have admin rights.
+In this case, you have both dev and release versions in your user space. Frankly, this might be the best choice, even if you have admin rights, especially if you use the *loader pattern*.
 
 ### Loader pattern for gadgets
 
