@@ -239,37 +239,64 @@ export const username = 'Nux@Wikiploy';
 export const password = '0abc...fckgw';
 ```
 
-Your minimal **developer deployment script** `wikiploy-dev.mjs`:
+Your **common deployment script** `wikiploy-common.mjs`:
 ```js
-import {DeployConfig, WikiployLite, userPrompt} from 'wikiploy';
+import { DeployConfig, userPrompt } from 'wikiploy';
 
-import * as botpass from './bot.config.js';
-const ployBot = new WikiployLite(botpass);
+/**
+ * Add config.
+ * @param {Array} configs DeployConfig array.
+ * @param {String} site Domian of a MW site.
+ */
+export function addConfig(configs, site) {
+	configs.push(new DeployConfig({
+		src: 'dist/yourGadetName.js',
+		dst: '~/yourGadetName.js',
+		site,
+		nowiki: true,
+	}));
+	configs.push(new DeployConfig({
+		src: 'dist/yourGadetName.css',
+		dst: '~/yourGadetName.css',
+		site,
+	}));
+}
 
-// default site for DeployConfig
-ployBot.site = "en.wikipedia.org";
-
-// run asynchronously to be able to wait for results
-(async () => {
-	// custom summary from a prompt
+/**
+ * Read and setup summary.
+ * @param {WikiployLite} ployBot 
+ */
+export async function setupSummary(ployBot) {
 	const summary = await userPrompt('Summary of changes (empty for default summary):');
 	if (typeof summary === 'string' && summary.length) {
 		ployBot.summary = () => {
 			return summary;
-		}
+		};
 	}
+}
+```
+We use a separate file to define common functions, making changes to both release and dev Wikiploy scripts simpler.
+
+Note that `~` in `dst` properties will be replaced with `User:SomeName`, representing the user space of the currently logged-in user (your user space). For more details about this basic code and `DeployConfig` properties, refer to the [Wikiploy rollout example](https://github.com/Eccenux/wikiploy-rollout-example/).
+
+Your minimal **developer deployment script** `wikiploy-dev.mjs`:
+```js
+import { WikiployLite } from 'wikiploy';
+
+import * as botpass from './bot.config.js';
+const ployBot = new WikiployLite(botpass);
+
+// common deploy function(s)
+import { addConfig, setupSummary } from './wikiploy-common.mjs';
+
+// run asynchronously to be able to wait for results
+(async () => {
+	// custom summary from a prompt
+	await setupSummary();
 
 	// push out file(s) to wiki
 	const configs = [];
-	configs.push(new DeployConfig({
-		src: 'dist/yourGadetName.js',
-		dst: '~/yourGadetName.js',
-		nowiki: true,
-	}));
-	configs.push(new DeployConfig({
-		src: 'dist/yourGadetName.css',
-		dst: '~/yourGadetName.css',
-	}));
+	addConfig(configs, 'en.wikipedia.org');
 
 	await ployBot.deploy(configs);
 
@@ -279,35 +306,26 @@ ployBot.site = "en.wikipedia.org";
 });
 ```
 
-Note that `~` will be `User:SomeName` so the user space of a currently logged in user (you user space).
-You can omit `dst` and it will default to `dst: '~/${src}'`. More about this basic code and `dst` in the [Wikiploy rollout example](https://github.com/Eccenux/wikiploy-rollout-example/).
-
-Config for your **main deployment script** `wikiploy.mjs`:
+Your **main deployment script** `wikiploy.mjs`:
 ```js
-// [...] (same sa -dev)
+import { WikiployLite } from 'wikiploy';
+
+import * as botpass from './bot.config.js';
+const ployBot = new WikiployLite(botpass);
+
+// common deploy function(s)
+import { addConfig, setupSummary } from './wikiploy-common.mjs';
+
+// run asynchronously to be able to wait for results
+(async () => {
+	// custom summary from a prompt
+	await setupSummary();
 
 	// push out file(s) to wiki
-	// dev version
 	const configs = [];
-	configs.push(new DeployConfig({
-		src: 'dist/yourGadetName.js',
-		dst: '~/yourGadetName.js',
-		nowiki: true,
-	}));
-	configs.push(new DeployConfig({
-		src: 'dist/yourGadetName.css',
-		dst: '~/yourGadetName.css',
-	}));
-	// gadget
-	configs.push(new DeployConfig({
-		src: 'dist/yourGadetName.js',
-		dst: 'MediaWiki:Gadget-yourGadetName.js',
-		nowiki: true,
-	}));
-	configs.push(new DeployConfig({
-		src: 'dist/yourGadetName.css',
-		dst: 'MediaWiki:Gadget-yourGadetName.css',
-	}));
+	addConfig(configs, 'pl.wikipedia.org');
+	addConfig(configs, 'en.wikipedia.org');
+	addConfig(configs, 'pl.wikisource.org');
 
 	await ployBot.deploy(configs);
 
@@ -317,13 +335,15 @@ Config for your **main deployment script** `wikiploy.mjs`:
 });
 ```
 
-Note: Above is only the config part of the script.
+## Release vs dev release
 
-We update both dev and release version above. This will make an empty edit in a dev script if you already deployed it.
+### Deploying as a gadget
 
-Though we only deploy to `site = "en.wikipedia.org"` you could use other configs to deploy to many wikis:
+There are various ways you could develop gadgets. The most standard way would be to deploy to the `MediaWiki:Gadget-` namespace.
+
+In `wikiploy-common.mjs` add:
 ```js
-function addConfig(configs, site) {
+export function addConfigRelease(configs, site) {
 	configs.push(new DeployConfig({
 		src: 'dist/yourGadetName.js',
 		dst: 'MediaWiki:Gadget-yourGadetName.js',
@@ -336,10 +356,74 @@ function addConfig(configs, site) {
 		site,
 	}));
 }
-addConfig(configs, 'pl.wikipedia.org');
-addConfig(configs, 'pl.wikisource.org');
 ```
-The script doesn't have any limits. You do need interface-admin rights to deploy to `MediaWiki:Gadget-` namespace. So you might need to use `~/` instead to deploy to your user-space.
+
+In your main deployment script you could have something like (`wikiploy.mjs`):
+```js
+	// dev version
+	addConfig(configs, 'en.wikipedia.org');
+	// release versions
+	addConfigRelease(configs, 'pl.wikipedia.org');
+	addConfigRelease(configs, 'pl.wikisource.org');
+	addConfigRelease(configs, 'en.wikipedia.org');
+```
+The script doesn't have any limits. However, you do need interface-admin rights to deploy to the `MediaWiki:Gadget-` namespace. So, you might need to use `~/` to deploy to your user-space.
+
+### Deploying in your user space
+
+**If you do *not* have interface-admin rights**, the functions could look like this:
+
+```js
+export function addConfig(configs, site, isRelease) {
+	let deploymentName = isRelease ? '~/yourGadetName.js' ? '~/yourGadetName-dev.js';
+	configs.push(new DeployConfig({
+		src: 'dist/yourGadetName.js',
+		dst: '~/yourGadetName.js',
+		site,
+		nowiki: true,
+	}));
+	configs.push(new DeployConfig({
+		src: 'dist/yourGadetName.css',
+		dst: '~/yourGadetName.css',
+		site,
+	}));
+}
+export function addConfigRelease(configs, site) {
+	addConfig(configs, site, true);
+}
+```
+
+In this case, you have both dev and release versions in your user space. Frankly, this might be the best choice, even if you have admin rights.
+
+### A loader pattern for gadgets
+
+Even if you have all administrative rights on a wiki, you might still want to load the main script from a small loader. The **loader pattern** allows you to provide conditions for loading the main script from the gadget file.
+
+The loader pattern is most useful when you want to test specific capabilities of a device and only then load the script. This is how you could load popups (which don't work well on touch devices, i.e., devices that cannot hover).
+
+Example of what `MediaWiki:Gadget-Popups.js` could look like:
+```js
+// only on devices that can hover (not on touch-only, so not on smartphones)
+if (window.matchMedia && !window.matchMedia("(hover: none)").matches) {
+	importScript('User:Nux/Popups.js');
+}
+```
+
+You could also have a gadet that is default, but only works on specific pages:
+```js
+// load config
+var config = mw.config.get( [
+	'wgNamespaceNumber',
+	'wgTitle',
+] );
+// only on AfD subpages
+if ( config.wgNamespaceNumber == 4 && config.wgTitle.startsWith('Articles for deletion/') ) {
+	importScript('User:Nux/AfD-helper.js');
+}
+```
+The loader pattern is beneficial because it improves website performance. In this pattern, the main gadget code is only loaded when it can be useful.
+
+Loading from the `User` namespace might also help make it clear who is responsible for the gadget. However, it might not work when there is no single user responsible, such as when the main author becomes inactive. The community can always decide to fork the script, so that should not be a problem in practice.
 
 ## Exporting stuff 
 
