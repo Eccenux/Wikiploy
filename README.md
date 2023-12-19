@@ -52,7 +52,7 @@ The `WikiployLite` class is using a bot API to deploy scripts. You can use stand
 Botpass configuration:
 * Setup on e.g.: https://test.wikipedia.org/wiki/Special:BotPasswords
 * Rights you should setup (if you can): `assets\Bot passwords - Test Wikipedia.png`.
-* Example config file in: `assets\bot.config.public.js`.
+* Example config file in: `assets\public--bot.config.mjs`.
 
 **Warning!** Never, ever publish your bot password. If you do spill your password, reset/remove the password ASAP (on Special:BotPasswords).
 

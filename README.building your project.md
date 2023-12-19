@@ -302,7 +302,7 @@ Your minimal **developer deployment script** `wikiploy-dev.mjs`:
 ```js
 import { WikiployLite } from 'wikiploy';
 
-import * as botpass from './bot.config.js';
+import * as botpass from './bot.config.mjs';
 const ployBot = new WikiployLite(botpass);
 
 // common deploy function(s)
@@ -329,7 +329,7 @@ Your **main deployment script** `wikiploy.mjs`:
 ```js
 import { WikiployLite } from 'wikiploy';
 
-import * as botpass from './bot.config.js';
+import * as botpass from './bot.config.mjs';
 const ployBot = new WikiployLite(botpass);
 
 // common deploy function(s)

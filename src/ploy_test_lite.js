@@ -3,7 +3,7 @@ import WikiployLite from './WikiployLite.js';
 
 // https://test.wikipedia.org/wiki/Special:BotPasswords
 // Note that username should contain `@`.
-import * as botpass from './bot.config.js';
+import * as botpass from './bot.config.mjs';
 
 const ployBot = new WikiployLite(botpass);
 // mock
