@@ -438,7 +438,7 @@ Exposing things in `main.js` could look something like this:
 ```js
 var { MyGadget } = require("./MyGadget");
 
-// bot instance
+// instance
 var gadget = new MyGadget();
 
 // expose for external usage (*not* recommended)
