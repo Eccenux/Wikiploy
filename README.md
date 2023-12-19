@@ -1,24 +1,40 @@
 Wikiploy
 ==========================
 
-## Polski opis
+Wikiploy is a one-click solution to deploy JS and CSS to Wikipedia.
 
-[Wikipedia:Wikiploy](https://pl.wikipedia.org/wiki/Wikipedia:Wikiploy)
+After the initial setup, you can quickly build and deploy your user scripts and gadgets. Though this was designed to work with Wikipedia, you should be able to deploy to any [MediaWiki](https://www.mediawiki.org/)-based wiki. You can even deploy to multiple websites with just one click on your commandbar. Your only limitation is your access level to the wikis.
 
-## English description
+See also:
 
-User scripts and gadgets deployment for wikis (Wikipedia or more generally MediaWiki based wiki).
-Roll-out your JS, CSS etc from your git repository to as many MW wikis as you need.
+- [README: building your project](README.building your project.md) recommendation on how to build JS and CSS for your gadgets (includes unit testing setup).
+- [Wikipedia:Wikiploy on pl.wiki](https://pl.wikipedia.org/wiki/Wikipedia:Wikiploy) for Polish description.
+- (more links on the bottom)
 
-## New options
+## New capabilities
 
 ### nowiki (v1.7)
 
-Note! It is recommended that you use `nowiki: true` for all JS files. The `nowiki` property is a new option in `DeployConfig` since Wikiploy v1.7.
+The `nowiki` property is a new option in `DeployConfig` since Wikiploy v1.7. It is now recommended to use `nowiki: true` for all JS files.
+```js
+	configs.push(new DeployConfig({
+		src: 'dist/test.js',
+		dst: '~/test.js',
+		nowiki: true,
+	})); 
+```
 
 JavaScript page is still a wiki page... Kind of. It can be added to a category or link to other pages. To avoid this use the nowiki option.
 
 Don't add this option to CSS though. It won't work correctly.
+
+### userPrompt (v1.8)
+
+Use the `userPrompt` helper function to prompt for a summary in your Wikiploy script. This is only a helper. You can still set up a static summary, but a prompt helps to ensure you don't forget to change the summary.
+
+Note that when using `userPrompt` you have to use an interactive terminal. This might be a bit more tricky to set up but can still function as a one-click build from a commandbar (see [README: building your project](README.building your project.md)).
+
+## Wikiploy types
 
 ### Wikiploy full (deprecated)
 
@@ -40,53 +56,6 @@ Botpass configuration:
 
 **Warning!** Never, ever publish your bot password. If you do spill your password, reset/remove the password ASAP (on Special:BotPasswords).
 
-Example `.gitignore` for your project:
-```
-/node_modules
-*.lnk
-*.priv.*
-bot.config.js
-``` 
-
-## Basic script and dst
-```js
-import {DeployConfig, WikiployLite, userPrompt} from 'wikiploy';
-
-import * as botpass from './bot.config.js';
-const ployBot = new WikiployLite(botpass);
-
-// default site for DeployConfig
-ployBot.site = "en.wikipedia.org";
-
-// run asynchronously to be able to wait for results
-(async () => {
-	// Note! The `userPrompt` requires an interactive terminal.
-	// In VSC you can use tasks to get an interactive terminal and still run wikiploy from your commandbar.
-	const summary = await userPrompt('Summary of changes (empty for default summary):');
-	if (typeof summary === 'string' && summary.length) {
-		ployBot.summary = () => {
-			return summary;
-		}
-	}
-
-	// push out file(s) to wiki
-	const configs = [];
-	configs.push(new DeployConfig({
-		src: 'test.js',
-		dst: '~/test-wikiploy--test.js',
-		nowiki: true,
-	}));
-	await ployBot.deploy(configs);
-})().catch(err => {
-	console.error(err);
-	process.exit(1);
-});
-```
-
-Note that `~` will be `User:SomeName` so the user space of a currently logged in user (you user space).
-You can omit `dst` and it will default to `dst: '~/${src}'`.
-
-More about this basic code and `dst` in the [Wikiploy rollout example](https://github.com/Eccenux/wikiploy-rollout-example/).
 
 ## Different wiki sites
 Wikiploy defaults to deployments on `pl.wikipedia.org`.
