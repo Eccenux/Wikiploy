@@ -21,7 +21,7 @@ Your `package.json` (crucial part being `scripts`):
 	"type": "commonjs",
 	"scripts": {
 		"test": "mocha",
-		"build": "browserify src/main.js -o dist/yourGadgetName.js",
+		"build": "browserify src/main.js -o dist/yourGadgetName.js && node -e \"console.log('Build done');\" ",
 		"deploy-dev": "node wikiploy-dev.mjs",
 		"deploy": "node wikiploy.mjs",
 		"rollout-dev": "npm run build && npm run deploy-dev",
