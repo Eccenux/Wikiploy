@@ -17,11 +17,11 @@ bot.config.*
 Your `package.json` (crucial part being `scripts`):
 ```js
 {
-	"name": "wiki-gadget-yourgadetname",
+	"name": "wiki-gadget-yourgadgetname",
 	"type": "commonjs",
 	"scripts": {
 		"test": "mocha",
-		"build": "browserify src/main.js -o dist/yourGadetName.js",
+		"build": "browserify src/main.js -o dist/yourGadgetName.js",
 		"deploy-dev": "node wikiploy-dev.mjs",
 		"deploy": "node wikiploy.mjs",
 		"rollout-dev": "npm run build && npm run deploy-dev",
@@ -250,14 +250,14 @@ import { DeployConfig, userPrompt } from 'wikiploy';
  */
 export function addConfig(configs, site) {
 	configs.push(new DeployConfig({
-		src: 'dist/yourGadetName.js',
-		dst: '~/yourGadetName.js',
+		src: 'dist/yourGadgetName.js',
+		dst: '~/yourGadgetName.js',
 		site,
 		nowiki: true,
 	}));
 	configs.push(new DeployConfig({
-		src: 'dist/yourGadetName.css',
-		dst: '~/yourGadetName.css',
+		src: 'dist/yourGadgetName.css',
+		dst: '~/yourGadgetName.css',
 		site,
 	}));
 }
@@ -345,14 +345,14 @@ In `wikiploy-common.mjs` add:
 ```js
 export function addConfigRelease(configs, site) {
 	configs.push(new DeployConfig({
-		src: 'dist/yourGadetName.js',
-		dst: 'MediaWiki:Gadget-yourGadetName.js',
+		src: 'dist/yourGadgetName.js',
+		dst: 'MediaWiki:Gadget-yourGadgetName.js',
 		site,
 		nowiki: true,
 	}));
 	configs.push(new DeployConfig({
-		src: 'dist/yourGadetName.css',
-		dst: 'MediaWiki:Gadget-yourGadetName.css',
+		src: 'dist/yourGadgetName.css',
+		dst: 'MediaWiki:Gadget-yourGadgetName.css',
 		site,
 	}));
 }
@@ -375,16 +375,16 @@ The script doesn't have any limits. However, you do need interface-admin rights 
 
 ```js
 export function addConfig(configs, site, isRelease) {
-	let deploymentName = isRelease ? '~/yourGadetName.js' ? '~/yourGadetName-dev.js';
+	let deploymentName = isRelease ? '~/yourGadgetName.js' ? '~/yourGadgetName-dev.js';
 	configs.push(new DeployConfig({
-		src: 'dist/yourGadetName.js',
-		dst: '~/yourGadetName.js',
+		src: 'dist/yourGadgetName.js',
+		dst: '~/yourGadgetName.js',
 		site,
 		nowiki: true,
 	}));
 	configs.push(new DeployConfig({
-		src: 'dist/yourGadetName.css',
-		dst: '~/yourGadetName.css',
+		src: 'dist/yourGadgetName.css',
+		dst: '~/yourGadgetName.css',
 		site,
 	}));
 }
@@ -395,7 +395,7 @@ export function addConfigRelease(configs, site) {
 
 In this case, you have both dev and release versions in your user space. Frankly, this might be the best choice, even if you have admin rights.
 
-### A loader pattern for gadgets
+### Loader pattern for gadgets
 
 Even if you have all administrative rights on a wiki, you might still want to load the main script from a small loader. The **loader pattern** allows you to provide conditions for loading the main script from the gadget file.
 
@@ -409,7 +409,7 @@ if (window.matchMedia && !window.matchMedia("(hover: none)").matches) {
 }
 ```
 
-You could also have a gadet that is default, but only works on specific pages:
+You could also have a gadget that is default, but only works on specific pages:
 ```js
 // load config
 var config = mw.config.get( [
@@ -442,10 +442,10 @@ var { MyGadget } = require("./MyGadget");
 var gadget = new MyGadget();
 
 // expose for external usage (*not* recommended)
-window.yourGadetName = gadget;
+window.yourGadgetName = gadget;
 
 // hook when object is ready
-mw.hook('userjs.yourGadetName.loaded').fire(gadget);
+mw.hook('userjs.yourGadgetName.loaded').fire(gadget);
 
 $(function(){
 	// load Mediwiki core dependency
@@ -454,7 +454,7 @@ $(function(){
 		gadget.init();
 
 		// hook when initial elements are ready 
-		mw.hook('userjs.yourGadetName.ready').fire(gadget);
+		mw.hook('userjs.yourGadgetName.ready').fire(gadget);
 	});
 });
 ```
@@ -463,15 +463,15 @@ As you can see, hooks are better because you can keep the name of the variable s
 
 User options:
 ```js
-mw.hook('userjs.yourGadetName.loaded').add(function (gadget) {
+mw.hook('userjs.yourGadgetName.loaded').add(function (gadget) {
 	gadget.options.createTool = false;
 });
-importScript('User:Nux/yourGadetName.js');
+importScript('User:Nux/yourGadgetName.js');
 ```
 A more advanced customization:
 ```js
-mw.hook('userjs.yourGadetName.ready').add(function (gadget) {
-	var $tool = $('#some-unique-gadet-tool a');
+mw.hook('userjs.yourGadgetName.ready').add(function (gadget) {
+	var $tool = $('#some-unique-gadget-tool a');
 	$tool.text($tool.text() + ' & plugin');
 });
 ```
@@ -489,7 +489,7 @@ browserify script.js -t babelify --outfile bundle.js
 If the gadget is intended for advanced users it is safe to assume they won't use IE. So for most scripts you can probably skip babelify. But as of 2023 you will need `requiresES6` option in the gadget definition.
 
 ```
-yourClassyGadetName [ResourceLoader | requiresES6 | dependencies = mediawiki.util] | yourGadetName.js | yourGadetName.css
+yourClassyGadgetName [ResourceLoader | requiresES6 | dependencies = mediawiki.util] | yourGadgetName.js | yourGadgetName.css
 ```
 
 
