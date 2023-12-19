@@ -7,7 +7,7 @@ After the initial setup, you can quickly build and deploy your user scripts and 
 
 See also:
 
-- [README: building your project](README.building your project.md) recommendation on how to build JS and CSS for your gadgets (includes unit testing setup).
+- [README: building your project](https://github.com/Eccenux/Wikiploy/blob/main/README.building%20your%20project.md) recommendation on how to build JS and CSS for your gadgets (includes unit testing setup).
 - [Wikipedia:Wikiploy on pl.wiki](https://pl.wikipedia.org/wiki/Wikipedia:Wikiploy) for Polish description.
 - (more links on the bottom)
 
@@ -32,7 +32,7 @@ Don't add this option to CSS though. It won't work correctly.
 
 Use the `userPrompt` helper function to prompt for a summary in your Wikiploy script. This is only a helper. You can still set up a static summary, but a prompt helps to ensure you don't forget to change the summary.
 
-Note that when using `userPrompt` you have to use an interactive terminal. This might be a bit more tricky to set up but can still function as a one-click build from a commandbar (see [README: building your project](README.building your project.md)).
+Note that when using `userPrompt` you have to use an interactive terminal. This might be a bit more tricky to set up but can still function as a one-click build from a commandbar (see [README: building your project](https://github.com/Eccenux/Wikiploy/blob/main/README.building%20your%20project.md)).
 
 ## Wikiploy types
 
