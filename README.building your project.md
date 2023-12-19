@@ -94,12 +94,13 @@ Add `.vscode/extensions.json` to help install a set of **extensions**:
 VSC **settings** `.vscode/settings.json`:
 ```js
 {
+    "editor.detectIndentation": false,
+    "editor.useTabStops": true,
+    "editor.insertSpaces": false,
 	"search.exclude": {
 		"package-lock.json": true,
+		"**/dist/": true,
 	},
-	"editor.detectIndentation": false,
-	"editor.useTabStops": true,
-	"editor.insertSpaces": false,
 }
 ```
 
