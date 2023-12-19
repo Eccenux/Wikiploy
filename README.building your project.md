@@ -335,7 +335,7 @@ import { addConfig, setupSummary } from './wikiploy-common.mjs';
 });
 ```
 
-## Release vs dev release
+## Appendix: Release vs dev release
 
 ### Deploying as a gadget
 
@@ -425,7 +425,7 @@ The loader pattern is beneficial because it improves website performance. In thi
 
 Loading from the `User` namespace might also help make it clear who is responsible for the gadget. However, it might not work when there is no single user responsible, such as when the main author becomes inactive. The community can always decide to fork the script, so that should not be a problem in practice.
 
-## Exporting stuff 
+## Appendix: Exporting stuff 
 
 Note that *browserify* will wrap your code with a function automatically, so you don't have to worry about leaking variables to the global scope (you should still remember to define variables with `var`, `let`, or `const`).
 
@@ -476,7 +476,7 @@ mw.hook('userjs.yourGadgetName.ready').add(function (gadget) {
 });
 ```
 
-## Using classes
+## Appendix: Using classes
 
 JS has classes for a long time. They don't work in IE and you cannot use them in default gadgets on Wikipedia. If you are building a default gadget you might want to add [babeljs](https://babeljs.io/) as a build step.
 ```bash
