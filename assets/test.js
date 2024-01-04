@@ -7,4 +7,4 @@
  */
 // test.js
 console.log('test');
-/* puppeteer 21.6.1 xor mwn 2.0.2 */
+/* puppeteer 21.7.0 xor mwn 2.0.2 */
