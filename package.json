@@ -1,6 +1,6 @@
 {
   "name": "wikiploy",
-  "version": "1.8.3",
+  "version": "1.8.4",
   "description": "User scripts and gadgets deployment for MediaWiki (Wikipedia).",
   "main": "src/index.js",
   "type": "module",
@@ -27,7 +27,7 @@
   "homepage": "https://github.com/Eccenux/Wikiploy#readme",
   "dependencies": {
     "mwn": "2.0.x",
-    "puppeteer": "21.9.x"
+    "puppeteer": "21.10.x"
   },
   "devDependencies": {
     "bump-version": "0.5.0",
