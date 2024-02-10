@@ -15,11 +15,11 @@ See also:
 
 ### Lightweight Dependencies (v2.0)
 
-We had a good run, but it's time to bid farewell to the [Puppeteer](https://pptr.dev/) and free the puppets ;). Obviously, this might be a breaking change if you really need to use it. However, the Wikiploy API doesn't really change...
+We had a good run, but it's time to bid farewell to [Puppeteer](https://pptr.dev/) and free the puppets ;). Obviously, this might be a breaking change if you really need to use it. However, the Wikiploy API doesn't really change...
 
 The only change is that you need to provide bot configuration to Wikiploy (as already described for WikiployLite). It's not nothing, but you only need to follow few steps from the [Botpass configuration section](#botpass-configuration). You only need to do it once and then use in all your user scripts.
 
-`WikiployLite` is now a synonym to `Wikiploy`.
+`WikiployLite` is now synonymous with `Wikiploy`. You can use either of the class names.
 
 ### nowiki (v1.7)
 
@@ -46,14 +46,14 @@ Note that when using `userPrompt` you have to use an interactive terminal. This 
 
 The `Wikiploy` class can be used to help deploy scripts. It is using a bot API to do that, but don't worry, you don't need to be a bot ;).
 
-You do need to setup a bot password though (on [[Special:BotPasswords]]). It's not as hard as it might seem as you can do this on any Wikimedia wiki and it will work for all WMF wikis. You don't need a bot account for this to work. You will just create an alias for your stadnard account and special password just for your scripts.
+You do need to setup a bot password though (on [[Special:BotPasswords]]). It's not as hard as it might seem as **you can do this on *any* Wikimedia wiki and it will work for *all* WMF wikis**. You don't need a bot account for this to work. You will just create an alias for your stadnard account and special password just for your scripts.
 
 ## Botpass configuration
-A bot password is just a sub-account. It helps to keep things separated and safe.
+A bot password is essentially a sub-account, designed to help keep your activities separated and secure. Setting up a sub-account is straightforward, and nearly anyone can do it.
 
-1. Setup your sub-account on e.g.: https://test.wikipedia.org/wiki/Special:BotPasswords
-2. Choose a name and rights for your sub-account. Example rights you should setup to deploy gadgets (if you can): [assets\Bot passwords - Test Wikipedia.png](https://github.com/Eccenux/Wikiploy/blob/main/assets/Bot%20passwords%20-%20Test%20Wikipedia.png).
-3. Create your `bot.config.mjs` file. You can find an example config file in: `assets\public--bot.config.mjs`.
+1. Begin by setting up your sub-account on this page: [https://test.wikipedia.org/wiki/Special:BotPasswords](test.wikipedia.org/wiki/Special:BotPasswords).
+2. Choose a name and specify the permissions for your sub-account. For instance, you should grant rights necessary for deploying gadgets (if applicable). You can refer to this example screenshot for setting up rights: [assets\Bot passwords - Test Wikipedia.png](https://github.com/Eccenux/Wikiploy/blob/main/assets/Bot%20passwords%20-%20Test%20Wikipedia.png).
+3. Next, create your `bot.config.mjs` file. An example configuration file can be found here: `assets\public--bot.config.mjs`.
 
 **Warning!** Never, ever publish your bot password. If you do spill your password, reset/remove the password ASAP (on [Special:BotPasswords](https://test.wikipedia.org/wiki/Special:BotPasswords)).
 
