@@ -69,10 +69,28 @@ class UpdateChecker {
 		}
 	}
 
+	/**
+	 * Check current version.
+	 * 
+	 * Does a fresh read from JSON.
+	 *
+	 * @return $versionFromNpm Version in package.json.
+	 */
+	public function checkMain() {
+		$content = file_get_contents('package.json');
+		$this->package = json_decode($content, true);
+		return $this->package['version'];
+	}
+
+	/**
+	 * Update test assest with current versions.
+	 *
+	 * @param string $path Test asset path.
+	 */
 	public function updateAsset($path) {
 		$content = file_get_contents($path);
-		$versionInfo = "/* puppeteer {$this->versions['puppeteer']} xor mwn {$this->versions['mwn']} */";
-		$content = preg_replace('#/\* puppeteer [0-9.x]+ \w+ mwn [0-9.x]+ \*/#', $versionInfo, $content);
+		$versionInfo = "$1 Wikiploy v{$this->package['version']} with MWN v{$this->versions['mwn']} $2";
+		$content = preg_replace('@(/\*##).+(##\*/)@', $versionInfo, $content);
 		file_put_contents($path, $content);
 	}
 }

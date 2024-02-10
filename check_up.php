@@ -9,17 +9,24 @@ runner('git pull', -1);
 
 $versionChecker = new UpdateChecker();
 // check and update internals
-$versionChecker->checkPackage("puppeteer");
+// $versionChecker->checkPackage("puppeteer");
 $versionChecker->checkPackage("mwn");
 // save
-if ($versionChecker->hasChanges) {
+if (!$versionChecker->hasChanges) {
+	echo "\n[INFO] No updates for main deps.\n";
+} else {
 	$versionChecker->save();
-	// update test.js/css (puppeteer/mwn version)
-	$versionChecker->updateAsset('assets/test.css');
-	$versionChecker->updateAsset('assets/test.js');
 
 	echo "\n[INFO] Bump version\n";
 	runner('npm run bump');
+
+	$packageVersion = $versionChecker->checkMain(); // check and update internals
+	echo "\n[INFO] New version: $packageVersion\n";
+	// update test.js/css (puppeteer/mwn version)
+	echo "\n[INFO] Update version in assets\n";
+	$versionChecker->updateAsset('assets/test.css');
+	$versionChecker->updateAsset('assets/test.js');
+
 	echo "\n[INFO] Update packages and locks\n";
 	runner('npm up');
 	echo "\n[INFO] Test\n";

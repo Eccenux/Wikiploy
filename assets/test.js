@@ -7,4 +7,4 @@
  */
 // test.js
 console.log('test');
-/* puppeteer 22.0.0 xor mwn 2.0.2 */
+/*## Wikiploy v2.0.0 with MWN v2.0.2 ##*/
