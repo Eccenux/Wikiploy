@@ -11,6 +11,12 @@ See also:
 - [Wikipedia:Wikiploy on pl.wiki](https://pl.wikipedia.org/wiki/Wikipedia:Wikiploy) for Polish description.
 - (more links on the bottom)
 
+## The last puppeteer
+
+Version 1.9 is probably going to be the last with the [puppeteer](https://pptr.dev/). The amout of changes in this library and amount of dependencies just doesn't cut it. It is just too heavy for this project.
+
+I might update v1.9 branch or release a separate Wikiploy, but I don't know if there would be any interest.
+
 ## New capabilities
 
 ### nowiki (v1.7)
