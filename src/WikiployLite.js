@@ -19,6 +19,14 @@ export default class WikiployLite extends WikiployBase {
 	constructor(botpass) {
 		super();
 
+		if (typeof botpass != 'object') {
+			console.error('Note! Use `botpass` to init config.')
+			botpass = {
+				username: '__not_provided__',
+				password: '__fake__',
+			};
+		}
+
 		/** [[Special:BotPasswords]] data. */
 		this.botpass = {
 			username: botpass.username,

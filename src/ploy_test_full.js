@@ -1,6 +1,12 @@
 import DeployConfig from './DeployConfig.js';
 import Wikiploy from './Wikiploy.js';
 
+/**
+	Deprecated, do not use.
+
+	Legacy script that works with Puppeteer.
+*/
+
 const ployBot = new Wikiploy();
 // mock
 // ployBot.mock = true;

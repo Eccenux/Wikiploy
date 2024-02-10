@@ -21,6 +21,7 @@ function sleep(sleepMs) {
  * MediaWiki deployment automation.
  * Deploy scripts with a browser (puppetter).
  * 
+ * @deprecated Use `WikiployLite` instead. WikiployLite will replace Wikiploy.
  * @property _browser {Browser} Browser connection.
  */
 export default class Wikiploy extends WikiployBase {
