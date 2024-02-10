@@ -38,18 +38,14 @@ You can also run (and debug) each test case directly from a test file. You might
 Step 1. Check and update versions.
 ```bash
 php ./check_up.php
+# npm up
+# npm test
 ```
 
-Step 2a. Test Puppeteer.
- - Open *Chrome Canary* in *debug* mode.
- - Run `ploy_test_full.js`.
-
-Step 2b. Test MWN:
+Step 2. Test MWN:
  - Run `ploy_test_lite.js`.
 
-Step 3. Final commands.
+Step 3. Publish.
 ```bash
-# npm up
-npm test
 npm publish
 ```

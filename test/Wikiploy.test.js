@@ -1,7 +1,13 @@
 /* global describe, it */
 import { assert } from 'chai';
-import Wikiploy from '../src/Wikiploy.js';
+import { default as Wikiploy } from '../src/WikiployLite.js';
 import DeployConfig from '../src/DeployConfig.js';
+
+/** Fake bot auth. */
+const botpass = {
+	username: 'test',
+	password: 'mock',
+}
 
 describe('Wikiploy', function () {
 	
@@ -17,7 +23,7 @@ describe('Wikiploy', function () {
 		it('should use config string', function () {
 			let version = 'v1.1';
 			let expected = version + ' ' + tag;
-			const ployBot = new Wikiploy();
+			const ployBot = new Wikiploy(botpass);
 			const summary = prepareSummary(ployBot, {
 				src: 'test.js',
 				summary: version,
@@ -27,7 +33,7 @@ describe('Wikiploy', function () {
 		it('should use config function', function () {
 			let version = 'v1.2';
 			let expected = version + ' ' + tag;
-			const ployBot = new Wikiploy();
+			const ployBot = new Wikiploy(botpass);
 			const summary = prepareSummary(ployBot, {
 				src: 'test.js',
 				summary: () => version,
@@ -37,7 +43,7 @@ describe('Wikiploy', function () {
 		it('should use global function', function () {
 			let version = 'v1.3';
 			let expected = version + ' ' + tag;
-			const ployBot = new Wikiploy();
+			const ployBot = new Wikiploy(botpass);
 			ployBot.summary = () => version;
 			const summary = prepareSummary(ployBot, {
 				src: 'test.js',
@@ -47,7 +53,7 @@ describe('Wikiploy', function () {
 	});
 
 	describe('prepareFile', function () {
-		const ployBot = new Wikiploy();
+		const ployBot = new Wikiploy(botpass);
 		function prepareFile(contents, configDef) {
 			const config = new DeployConfig(configDef);
 			let result = ployBot.prepareFile(config, contents);

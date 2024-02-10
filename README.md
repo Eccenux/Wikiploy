@@ -13,6 +13,14 @@ See also:
 
 ## New capabilities
 
+### Lightweight Dependencies (v2.0)
+
+We had a good run, but it's time to bid farewell to the [Puppeteer](https://pptr.dev/) and free the puppets ;). Obviously, this might be a breaking change if you really need to use it. However, the Wikiploy API doesn't really change...
+
+The only change is that you need to provide bot configuration to Wikiploy (as already described for WikiployLite). It's not nothing, but you only need to follow few steps from the [Botpass configuration section](#botpass-configuration). You only need to do it once and then use in all your user scripts.
+
+`WikiployLite` is now a synonym to `Wikiploy`.
+
 ### nowiki (v1.7)
 
 The `nowiki` property is a new option in `DeployConfig` since Wikiploy v1.7. It is now recommended to use `nowiki: true` for all JS files.
@@ -34,27 +42,20 @@ Use the `userPrompt` helper function to prompt for a summary in your Wikiploy sc
 
 Note that when using `userPrompt` you have to use an interactive terminal. This might be a bit more tricky to set up but can still function as a one-click build from a commandbar (see [README: building your project](https://github.com/Eccenux/Wikiploy/blob/main/README.building%20your%20project.md)).
 
-## Wikiploy types
+## Using Wikiploy
 
-### Wikiploy full (deprecated)
+The `Wikiploy` class can be used to help deploy scripts. It is using a bot API to do that, but don't worry, you don't need to be a bot ;).
 
-This is using [Puppeteer](https://pptr.dev/) to control [Chrome Canary](https://www.google.com/chrome/canary/) or similar. You just open Chrome with remote debug enabled and run a script. The idea is that you are logged in in Chrome and so all edits are still your edits. You can keep the Canary running in the background when you are changing and deploying more stuff. 
+You do need to setup a bot password though (on [[Special:BotPasswords]]). It's not as hard as it might seem as you can do this on any Wikimedia wiki and it will work for all WMF wikis. You don't need a bot account for this to work. You will just create an alias for your stadnard account and special password just for your scripts.
 
-Wikiploy will also work with other Chromium based browser. [Instructions for enabling remote debug in MS Edge](https://learn.microsoft.com/en-us/microsoft-edge/devtools-protocol-chromium/).
-Note that to completely close Edge you might need use settings: Continue running in background when Microsoft Edge is closed (pl. *Kontynuuj działanie aplikacji i rozszerzeń w tle po zamknięciu przeglądarki Microsoft Edge*).
+## Botpass configuration
+A bot password is just a sub-account. It helps to keep things separated and safe.
 
-### WikiployLite (recommended)
+1. Setup your sub-account on e.g.: https://test.wikipedia.org/wiki/Special:BotPasswords
+2. Choose a name and rights for your sub-account. Example rights you should setup to deploy gadgets (if you can): [assets\Bot passwords - Test Wikipedia.png](https://github.com/Eccenux/Wikiploy/blob/main/assets/Bot%20passwords%20-%20Test%20Wikipedia.png).
+3. Create your `bot.config.mjs` file. You can find an example config file in: `assets\public--bot.config.mjs`.
 
-The `WikiployLite` class is using a bot API to deploy scripts. You can use standard `Wikiploy` and `WikiployLite` interchangeably. The `DeployConfig` is the same. WikiployLite is recommended as long as you can use it.
-
-**WikiployLite** is less memory heavy as it doesn't use a browser (and doesn't use `Puppeteer`). You do need to setup a bot password though (on [[Special:BotPasswords]]). It's not as hard as it might seem as you can do this on any Wikimedia wiki and it will work for all WMF wikis. You don't need a bot account for this to work.
-
-Botpass configuration:
-* Setup on e.g.: https://test.wikipedia.org/wiki/Special:BotPasswords
-* Rights you should setup (if you can): `assets\Bot passwords - Test Wikipedia.png`.
-* Example config file in: `assets\public--bot.config.mjs`.
-
-**Warning!** Never, ever publish your bot password. If you do spill your password, reset/remove the password ASAP (on Special:BotPasswords).
+**Warning!** Never, ever publish your bot password. If you do spill your password, reset/remove the password ASAP (on [Special:BotPasswords](https://test.wikipedia.org/wiki/Special:BotPasswords)).
 
 
 ## Different wiki sites
