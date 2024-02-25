@@ -34,11 +34,9 @@ Your `package.json` (crucial part being `scripts`):
 		"chai": "4.x",
 		"eslint": "8.x",
 		"less": "4.x",
-		"mocha": "10.x"
+		"mocha": "10.x",
+		"wikiploy": "2.x"
 	},
-	"dependencies": {
-		"wikiploy": "1.x"
-	}
 }
 ```
 
