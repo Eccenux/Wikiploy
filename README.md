@@ -45,7 +45,7 @@ Don't add this option to CSS though. It won't work correctly.
 ## Using Wikiploy
 
 Either use [Wikiploy project template](https://github.com/Eccenux/wikiploy-rollout-example/releases) or add Wikiploy to your project:
-```
+```bash
 # npm install wikiploy --save-dev
 npm i wikiploy -D
 ```
