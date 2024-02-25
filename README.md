@@ -44,14 +44,20 @@ Don't add this option to CSS though. It won't work correctly.
 
 ## Using Wikiploy
 
+Either use [Wikiploy project template](https://github.com/Eccenux/wikiploy-rollout-example/releases) or add Wikiploy to your project:
+```
+# npm install wikiploy --save-dev
+npm i wikiploy -D
+```
+
 The `Wikiploy` class can be used to help deploy scripts. It is using a bot API to do that, but don't worry, you don't need to be a bot ;).
 
-You do need to setup a bot password though (on [[Special:BotPasswords]]). It's not as hard as it might seem as **you can do this on *any* Wikimedia wiki and it will work for *all* WMF wikis**. You don't need a bot account for this to work. You will just create an alias for your stadnard account and special password just for your scripts.
+You do need to setup a bot password though (on [[Special:BotPasswords]]). It's not as hard as it might seem as **you can do this on *any* Wikimedia wiki and it will work for *all* WMF wikis**. You don't need a bot account for this to work. You will just create an alias for your standard account and a special password just for your scripts.
 
 ## Botpass configuration
 A bot password is essentially a sub-account, designed to help keep your activities separated and secure. Setting up a sub-account is straightforward, and nearly anyone can do it.
 
-1. Begin by setting up your sub-account on this page: [https://test.wikipedia.org/wiki/Special:BotPasswords](test.wikipedia.org/wiki/Special:BotPasswords).
+1. Begin by setting up your sub-account on this page: [test.wikipedia.org/wiki/Special:BotPasswords](https://test.wikipedia.org/wiki/Special:BotPasswords).
 2. Choose a name and specify the permissions for your sub-account. For instance, you should grant rights necessary for deploying gadgets (if applicable). You can refer to this example screenshot for setting up rights: [assets\Bot passwords - Test Wikipedia.png](https://github.com/Eccenux/Wikiploy/blob/main/assets/Bot%20passwords%20-%20Test%20Wikipedia.png).
 3. Next, create your `bot.config.mjs` file. An example configuration file can be found here: `assets\public--bot.config.mjs`.
 
