@@ -7,8 +7,9 @@ After the initial setup, you can quickly build and deploy your user scripts and 
 
 See also:
 
-- [README: building your project](https://github.com/Eccenux/Wikiploy/blob/main/README.building%20your%20project.md) recommendation on how to build JS and CSS for your gadgets (includes unit testing setup).
-- [Wikipedia:Wikiploy on pl.wiki](https://pl.wikipedia.org/wiki/Wikipedia:Wikiploy) for Polish description.
+- [Wikiploy project template](https://github.com/Eccenux/wikiploy-rollout-example/releases) — quick start for you gadgets.
+- [README: building your project](https://github.com/Eccenux/Wikiploy/blob/main/README.building%20your%20project.md) — recommendation on how to build JS and CSS for your gadgets (includes unit testing setup).
+- [Wikipedia:Wikiploy on pl.wiki](https://pl.wikipedia.org/wiki/Wikipedia:Wikiploy) — Polish description.
 - (more links on the bottom)
 
 ## New capabilities
