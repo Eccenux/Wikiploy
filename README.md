@@ -14,6 +14,43 @@ See also:
 
 ## New capabilities
 
+### setupSummary (v2.1)
+
+A helper function that can replace your usages of `userPrompt`. It prompts a user and then supplies
+The `setupSummary` function initializes a summary for a given bot. It requires a `Wikiploy` bot object and optionally takes a gadget version and a standard summary text.
+
+#### Parameters
+
+- `ployBot`: A `Wikiploy` bot object. This is required to setup the `summary()` function.
+- `version` (optional): The version of your gadget. Defaults to an empty string if not provided.
+- `standardSummary` (optional): A string that provides a standard summary aside from the version. Defaults to "changes from Github".
+
+For a prompt answer: "fixed bug #123", you would get: "v5.6.0: fixed bug #123" (`v${version}: ${summary}`).
+
+#### Usage
+
+Basic usage:
+```js
+// custom summary from a prompt
+await setupSummary(ployBot);
+```
+
+Version from package:
+```js
+(async () => {
+	// custom summary from a prompt
+	let version = await readVersion('package.json');
+	await setupSummary(ployBot, version);
+	
+	// [...]
+
+	await ployBot.deploy(configs);
+})().catch(err => {
+	console.error(err);
+	process.exit(1);
+});
+```
+
 ### Lightweight Dependencies (v2.0)
 
 We had a good run, but it's time to bid farewell to [Puppeteer](https://pptr.dev/) and free the puppets ;). Obviously, this might be a breaking change if you really need to use it. However, the Wikiploy API doesn't really change...
