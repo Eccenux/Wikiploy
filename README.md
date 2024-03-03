@@ -16,16 +16,19 @@ See also:
 
 ### setupSummary (v2.1)
 
-A helper function that can replace your usages of `userPrompt`. It prompts a user and then supplies
-The `setupSummary` function initializes a summary for a given bot. It requires a `Wikiploy` bot object and optionally takes a gadget version and a standard summary text.
+A helper function that can replace your usages of `userPrompt`. It prompts a user running wikiploy for a summary of changes.
+It can optionally add a version number to the full summary of your edits (deploy-edits).
 
 #### Parameters
 
+The `setupSummary` function requires a `Wikiploy` bot object and optionally takes a gadget version and a standard summary text.
+
 - `ployBot`: A `Wikiploy` bot object. This is required to setup the `summary()` function.
 - `version` (optional): The version of your gadget. Defaults to an empty string if not provided.
-- `standardSummary` (optional): A string that provides a standard summary aside from the version. Defaults to "changes from Github".
+- `standardSummary` (optional): A string that provides a standard summary (aside from the version). Defaults to "changes from Github".
 
-For a prompt answer: "fixed bug #123", you would get: "v5.6.0: fixed bug #123" (`v${version}: ${summary}`).
+If your answer to the prompt would be: "fixed bug #123", you would get a full summary: "v5.6.0: fixed bug #123" (v${version}: ${summary}).
+For no answer you would get: "v5.6.0: changes from Github".
 
 #### Usage
 
