@@ -1,6 +1,6 @@
 {
   "name": "wikiploy",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "User scripts and gadgets deployment for MediaWiki (Wikipedia).",
   "main": "src/index.js",
   "type": "module",
@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "bump-version": "0.5.0",
-    "chai": "4.x",
+    "chai": "5.x",
     "eslint": "8.x",
     "mocha": "10.x"
   }
