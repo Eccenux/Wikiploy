@@ -7,12 +7,14 @@ require_once "./check/runner.php";
 
 runner('git pull', -1);
 
+$options = getopt("", ["force"]);
+
 $versionChecker = new UpdateChecker();
 // check and update internals
 // $versionChecker->checkPackage("puppeteer");
 $versionChecker->checkPackage("mwn");
 // save
-if (!$versionChecker->hasChanges) {
+if (!isset($options['force']) && !$versionChecker->hasChanges) {
 	echo "\n[INFO] No updates for main deps.\n";
 } else {
 	$versionChecker->save();

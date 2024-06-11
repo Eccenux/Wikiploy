@@ -37,7 +37,10 @@ You can also run (and debug) each test case directly from a test file. You might
 
 Step 1. Check and update versions.
 ```bash
+# check mwn updates and update test assets
 php ./check_up.php
+# force update of assets
+php ./check_up.php --force
 # npm up
 # npm test
 ```
