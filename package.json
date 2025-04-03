@@ -1,38 +1,40 @@
 {
-  "name": "wikiploy",
-  "version": "2.1.4",
-  "description": "User scripts and gadgets deployment for MediaWiki (Wikipedia).",
-  "main": "src/index.js",
-  "type": "module",
-  "scripts": {
-    "bump": "bump patch",
-    "test": "mocha"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Eccenux/Wikiploy.git"
-  },
-  "keywords": [
-    "Mediawiki",
-    "Wikipedia",
-    "deploy",
-    "rollout",
-    "gadgets"
-  ],
-  "author": "Maciej Nux Jaros",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Eccenux/Wikiploy/issues"
-  },
-  "homepage": "https://github.com/Eccenux/Wikiploy#readme",
-  "dependencies": {
-    "axios": "0.x",
-    "mwn": "2.0.x"
-  },
-  "devDependencies": {
-    "bump-version": "0.5.0",
-    "chai": "5.x",
-    "eslint": "8.x",
-    "mocha": "10.x"
-  }
+	"name": "wikiploy",
+	"version": "2.2.0",
+	"description": "User scripts and gadgets deployment for MediaWiki (Wikipedia).",
+	"main": "src/index.js",
+	"type": "module",
+	"scripts": {
+		"bump": "bump patch",
+		"test": "mocha"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Eccenux/Wikiploy.git"
+	},
+	"keywords": [
+		"Mediawiki",
+		"Wikipedia",
+		"deploy",
+		"rollout",
+		"gadgets"
+	],
+	"author": "Maciej Nux Jaros",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Eccenux/Wikiploy/issues"
+	},
+	"homepage": "https://github.com/Eccenux/Wikiploy#readme",
+	"engines": {
+		"node": ">=14"
+	},
+	"dependencies": {
+		"mwn": "3.0.x"
+	},
+	"devDependencies": {
+		"bump-version": "0.5.0",
+		"chai": "5.x",
+		"eslint": "8.x",
+		"mocha": "10.x"
+	}
 }

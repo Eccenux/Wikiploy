@@ -1,11 +1,30 @@
 Wikiploy
 ==========================
 
-Wikiploy is a one-click solution to deploy JS and CSS to Wikipedia.
+Wikiploy is a one-click solution to deploy JS and CSS to Wikipedia. It uses NodeJS version 14 or higher.
 
 After the initial setup, you can quickly build and deploy your user scripts and gadgets. Though this was designed to work with Wikipedia, you should be able to deploy to any [MediaWiki](https://www.mediawiki.org/)-based wiki. You can even deploy to multiple websites with just one click on your commandbar. Your only limitation is your access level to the wikis.
 
-See also:
+## Table of contents
+<!-- TOC depthfrom:2 updateonsave:false -->
+
+- [Table of contents](#table-of-contents)
+- [See also](#see-also)
+- [New capabilities](#new-capabilities)
+	- [setupSummary v2.1](#setupsummary-v21)
+		- [Parameters](#parameters)
+		- [Usage](#usage)
+	- [Lightweight Dependencies v2.0](#lightweight-dependencies-v20)
+	- [userPrompt v1.8](#userprompt-v18)
+	- [nowiki v1.7](#nowiki-v17)
+- [Using Wikiploy](#using-wikiploy)
+- [Botpass configuration](#botpass-configuration)
+- [Different wiki sites](#different-wiki-sites)
+- [External links](#external-links)
+
+<!-- /TOC -->
+
+## See also
 
 - [Wikiploy project template](https://github.com/Eccenux/wikiploy-rollout-example/releases) — quick start for you gadgets.
 - [README: building your project](https://github.com/Eccenux/Wikiploy/blob/main/README.building%20your%20project.md) — recommendation on how to build JS and CSS for your gadgets (includes unit testing setup).
