@@ -1,4 +1,6 @@
 <?php
+namespace Wikiploy;
+
 /**
  * Simple executioner.
  *

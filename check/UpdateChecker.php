@@ -102,7 +102,7 @@ class UpdateChecker {
 	 * @param string $path I/O path.
 	 */
 	public function updateScript($path, $vName, $version) {
-		$content = file_get_contents($path);
+		$input = file_get_contents($path);
 		$content = self::updateScriptContent($input, $vName, $version);
 		file_put_contents($path, $content);
 	}

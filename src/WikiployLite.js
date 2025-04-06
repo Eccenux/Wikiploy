@@ -6,8 +6,7 @@ import DeployConfig from './DeployConfig.js';
 
 import { promises as fs } from "fs";	// node v11+
 
-import * as verlib from './version.js';
-const version = await verlib.readVersion('./package.json');
+const version = /*version:main:*/'2.2.0'/*:main:version*/;
 
 /**
  * MediaWiki deployment automation.

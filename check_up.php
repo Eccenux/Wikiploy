@@ -1,4 +1,6 @@
 <?php
+namespace Wikiploy;
+
 /**
  * Automated check for updates.
  */
@@ -10,6 +12,11 @@ runner('git pull', -1);
 $options = getopt("", ["force"]);
 
 $versionChecker = new UpdateChecker();
+
+// update package version
+$packageVersion = $versionChecker->checkMain(); // check and update internals
+$versionChecker->updateScript("./src/WikiployLite.js", "main", $packageVersion);
+
 // check and update internals
 // $versionChecker->checkPackage("puppeteer");
 $versionChecker->checkPackage("mwn");
@@ -24,6 +31,8 @@ if (!isset($options['force']) && !$versionChecker->hasChanges) {
 
 	$packageVersion = $versionChecker->checkMain(); // check and update internals
 	echo "\n[INFO] New version: $packageVersion\n";
+	// re-update package version
+	$versionChecker->updateScript("./src/WikiployLite.js", "main", $packageVersion);
 	// update test.js/css (puppeteer/mwn version)
 	echo "\n[INFO] Update version in assets\n";
 	$versionChecker->updateAsset('assets/test.css');
