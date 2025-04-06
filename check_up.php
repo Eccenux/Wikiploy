@@ -11,32 +11,32 @@ runner('git pull', -1);
 
 $options = getopt("", ["force"]);
 
-$versionChecker = new UpdateChecker();
+$upChecker = new UpdateChecker();
 
 // update package version
-$packageVersion = $versionChecker->checkMain(); // check and update internals
-$versionChecker->updateScript("./src/WikiployLite.js", "main", $packageVersion);
+$packageVersion = $upChecker->checkMain();
+$upChecker->updateScript("./src/WikiployLite.js", "main", $packageVersion);
 
 // check and update internals
-// $versionChecker->checkPackage("puppeteer");
-$versionChecker->checkPackage("mwn");
+// $upChecker->checkPackage("puppeteer");
+$upChecker->checkPackage("mwn");
 // save
-if (!isset($options['force']) && !$versionChecker->hasChanges) {
+if (!isset($options['force']) && !$upChecker->hasChanges) {
 	echo "\n[INFO] No updates for main deps.\n";
 } else {
-	$versionChecker->save();
+	$upChecker->save();
 
 	echo "\n[INFO] Bump version\n";
 	runner('npm run bump');
 
-	$packageVersion = $versionChecker->checkMain(); // check and update internals
+	$packageVersion = $upChecker->checkMain(); // check and update internals
 	echo "\n[INFO] New version: $packageVersion\n";
 	// re-update package version
-	$versionChecker->updateScript("./src/WikiployLite.js", "main", $packageVersion);
+	$upChecker->updateScript("./src/WikiployLite.js", "main", $packageVersion);
 	// update test.js/css (puppeteer/mwn version)
 	echo "\n[INFO] Update version in assets\n";
-	$versionChecker->updateAsset('assets/test.css');
-	$versionChecker->updateAsset('assets/test.js');
+	$upChecker->updateAsset('assets/test.css');
+	$upChecker->updateAsset('assets/test.js');
 
 	echo "\n[INFO] Update packages and locks\n";
 	runner('npm up');
