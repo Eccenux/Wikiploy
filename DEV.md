@@ -33,6 +33,14 @@ To view output of individual tests use the testing sidebar. Navigate to the test
 
 You can also run (and debug) each test case directly from a test file. You might need to press reload in the sidebar if you don't see buttons to run and debug tests.
 
+## PHP tests
+
+```powershell
+#composer update
+composer install
+composer test
+```
+
 ## Publishing
 
 Step 1. Check and update versions.

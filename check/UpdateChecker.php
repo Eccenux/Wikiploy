@@ -1,4 +1,6 @@
 <?php
+namespace Wikiploy;
+
 /**
  * Check for updates.
  */
@@ -93,4 +95,43 @@ class UpdateChecker {
 		$content = preg_replace('@(/\*##).+(##\*/)@', $versionInfo, $content);
 		file_put_contents($path, $content);
 	}
+
+	/**
+	 * Update a script with version.
+	 *
+	 * @param string $path I/O path.
+	 */
+	public function updateScript($path, $vName, $version) {
+		$content = file_get_contents($path);
+		$content = self::updateScriptContent($input, $vName, $version);
+		file_put_contents($path, $content);
+	}
+	/**
+	 * Update input text with named version.
+	 * 
+	 * @param string $input Input.
+	 * @param string $vName Name of the version (added in marker).
+	 * @param string $version New version number.
+	 */
+	public static function updateScriptContent($input, $vName, $version):string {
+		// Example:
+		// /*version:vName:*/''/*:vName:version*/
+		$content = preg_replace_callback(
+			'@(/\*version:'.$vName.':\*/)(?:(\')[^\']*\'|(")[^"]*")(/\*:'.$vName.':version\*/)@',
+			function ($matches) use ($version) {
+				$qt = !empty($matches[2]) ? $matches[2] : $matches[3];
+				return $matches[1].$qt.$version.$qt.$matches[4];
+			},
+			$input
+		);
+		return $content;
+	}
 }
+
+// quick debug
+// $input = "const version = /*version:main:*/''/*:main:version*/;";
+// $expected = "const version = /*version:main:*/'3.0.0'/*:main:version*/;";
+// $result = UpdateChecker::updateScriptContent($input, 'main', '3.0.0');
+// echo "\n e: $expected";
+// echo "\n r: $result";
+

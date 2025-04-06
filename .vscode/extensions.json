@@ -2,6 +2,8 @@
 	"recommendations": [
 		"gsppvo.vscode-commandbar",
 		"hbenl.vscode-test-explorer",
-		"hbenl.vscode-mocha-test-adapter"
+		"hbenl.vscode-mocha-test-adapter",
+		"xdebug.php-debug",
+		"recca0120.vscode-phpunit"
 	]
 }

@@ -2,3 +2,5 @@ node_modules
 *.lnk
 *.priv.*
 bot.config.*
+/vendor/
+.phpunit.result.cache
