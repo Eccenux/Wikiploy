@@ -6,7 +6,7 @@ import DeployConfig from './DeployConfig.js';
 
 import { promises as fs } from "fs";	// node v11+
 
-const version = /*version:main:*/'2.2.1'/*:main:version*/;
+const version = /*version:main:*/'2.2.2'/*:main:version*/;
 
 /**
  * MediaWiki deployment automation.
