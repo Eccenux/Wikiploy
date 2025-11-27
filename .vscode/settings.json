@@ -4,5 +4,13 @@
 	},
     "editor.detectIndentation": false,
     "editor.useTabStops": true,
-    "editor.insertSpaces": false,
+	"editor.insertSpaces": false,
+	"spellright.language": [
+		"en"
+	],
+	"spellright.documentTypes": [
+		"markdown",
+		"latex",
+		"plaintext"
+	],
 }

@@ -3,7 +3,7 @@ Development
 
 Wikiploy is a Node.js project and is configured to use VSCode for development.
 
-## Prepararion
+## Preparation
 
 ### Install Nodejs
 Obviously you'll need [Node.js](https://nodejs.org/en).
@@ -15,7 +15,7 @@ Note that you can use [NVM-windows](https://github.com/coreybutler/nvm-windows) 
 Run first `npm i`.
 You might want to run `npm up` to update some scripts too.
 
-Recomended global modules/tools:
+Recommended global modules/tools:
 ```bash
 npm install -g eslint
 npm install -g mocha
