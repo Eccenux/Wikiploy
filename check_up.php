@@ -41,5 +41,5 @@ if (!isset($options['force']) && !$upChecker->hasChanges) {
 	echo "\n[INFO] Update packages and locks\n";
 	runner('npm up');
 	echo "\n[INFO] Test\n";
-	runner('npm test', 3);
+	runner('npm run test:run', 3);
 }

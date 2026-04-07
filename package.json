@@ -1,12 +1,12 @@
 {
   "name": "wikiploy",
-  "version": "2.2.5",
+  "version": "2.3.0",
   "description": "User scripts and gadgets deployment for MediaWiki (Wikipedia).",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
     "bump": "bump patch",
-	"test:run": "vitest run",
+    "test:run": "vitest run",
     "test": "vitest"
   },
   "repository": {
