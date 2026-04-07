@@ -1,12 +1,13 @@
 {
   "name": "wikiploy",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "description": "User scripts and gadgets deployment for MediaWiki (Wikipedia).",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
     "bump": "bump patch",
-    "test": "mocha"
+	"test:run": "vitest run",
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,6 @@
     "bump-version": "0.5.0",
     "chai": "6.x",
     "eslint": "9.x",
-    "mocha": "11.x"
+    "vitest": "^4.1.0"
   }
 }

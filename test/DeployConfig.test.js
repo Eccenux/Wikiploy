@@ -1,4 +1,4 @@
-/* global describe, it */
+import { describe, it } from 'vitest'
 import { assert } from 'chai';
 import DeployConfig from '../src/DeployConfig.js';
 
