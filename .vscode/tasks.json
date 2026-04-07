@@ -7,7 +7,7 @@
 			"group": "test",
 			"problemMatcher": [],
 			"label": "Run tests",
-			"detail": "mocha"
+			"detail": "JS tests"
 		},
 		{
 			"type": "npm",

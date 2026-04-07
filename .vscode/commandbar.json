@@ -8,7 +8,7 @@
 		// running tests as a task: keeps colors
 		{
 			"text": "test",
-			"tooltip": "Run mocha tests.",
+			"tooltip": "Run tests.",
 			"color": "lightgreen",
 			"commandType": "palette",
 			"command": "workbench.action.tasks.runTask|Run tests",

@@ -18,12 +18,11 @@ You might want to run `npm up` to update some scripts too.
 Recommended global modules/tools:
 ```bash
 npm install -g eslint
-npm install -g mocha
 ```
 You mostly need above if you will be using your shell (command line).
 
 ## Running tests
-To run tests in your shell you can use npm: `npm test`. Or just run `mocha`.
+To run tests in your shell you can use npm: `npm test`.
 
 Better yet install [VSCode](https://code.visualstudio.com/download) and the recommended extenstions. It will make things easier (especially for debugging tests).
 
