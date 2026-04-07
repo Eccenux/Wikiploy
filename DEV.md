@@ -57,5 +57,6 @@ Step 2. Test MWN:
 
 Step 3. Publish.
 ```bash
+npm login
 npm publish
 ```
