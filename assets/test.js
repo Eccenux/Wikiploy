@@ -7,4 +7,4 @@
  */
 // test.js
 console.log('test');
-/*## Wikiploy v2.3.1 with MWN v3.0.1 ##*/
+/*## Wikiploy v2.3.2 with MWN v3.0.2 ##*/
