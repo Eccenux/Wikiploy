@@ -11,6 +11,7 @@ After the initial setup, you can quickly build and deploy your user scripts and 
 - [Table of contents](#table-of-contents)
 - [See also](#see-also)
 - [New capabilities](#new-capabilities)
+	- [libParams v2.4](#libparams-v24)
 	- [setupSummary v2.1](#setupsummary-v21)
 		- [Parameters](#parameters)
 		- [Usage](#usage)
@@ -32,6 +33,27 @@ After the initial setup, you can quickly build and deploy your user scripts and 
 - (more links on the bottom)
 
 ## New capabilities
+
+### libParams (v2.4)
+
+The `libParams` property is a new option in `DeployConfig` since Wikiploy v2.4. You can use it to pass data to the MWN bot. See [MWN configuration options](https://github.com/siddharthvp/mwn#features).
+
+For example, you might want to use a higher `maxlag` value when deploying to Wikidata (the default `maxlag: 5` seconds is often not enough for Wikidata).
+```js
+	// MWN params for Wikidata
+	const wdParams = {
+		maxlag: 10,
+	};
+	configs.push(new DeployConfig({
+		src: 'dist/test.js',
+		dst: '~/test.js',
+		nowiki: true,
+		site: 'www.wikidata.org',
+		libParams: wdParams,
+	})); 
+```
+
+Note: Please don't overuse this option. You should keep the default settings most of the time. It's probably only necessary when deploying to Wikidata.
 
 ### setupSummary (v2.1)
 

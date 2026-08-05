@@ -21,6 +21,11 @@ export default class DeployConfig {
 		if (!this.site || typeof this.site != 'string') {
 			this.site = '';
 		}
+		/** Params like `maxlag` to pass to MWN https://github.com/siddharthvp/mwn#features */
+		this.libParams = false;
+		if (typeof options?.libParams === 'object') {
+			this.libParams = options.libParams;
+		}
 		/** Add nowiki tag around code (false by default). */
 		this.nowiki = options?.nowiki;
 		/**

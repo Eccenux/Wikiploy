@@ -12,6 +12,12 @@ const ployBot = new WikiployLite(botpass);
 
 (async () => {
 	const configs = [];
+
+	// MWN params for Wikidata
+	const wdParams = {
+		maxlag: 10,
+	};
+
 	configs.push(new DeployConfig({
 		src: 'assets/test.js',
 		dst: '~/test-wikiploylite--test.js',
@@ -24,6 +30,14 @@ const ployBot = new WikiployLite(botpass);
 		nowiki: true,
 	}));
 	configs.push(new DeployConfig({
+		src: 'assets/test.js',
+		dst: '~/test-wikiploylite--test.js',
+		site: 'www.wikidata.org',
+		libParams: wdParams,
+		nowiki: true,
+	}));
+
+	configs.push(new DeployConfig({
 		src: 'assets/test.css',
 		dst: '~/test-wikiploylite--test.css',
 	}));
@@ -32,6 +46,13 @@ const ployBot = new WikiployLite(botpass);
 		dst: '~/test-wikiploylite--test.css',
 		site: 'en.wikipedia.org',
 	}));
+	configs.push(new DeployConfig({
+		src: 'assets/test.css',
+		dst: '~/test-wikiploylite--test.css',
+		site: 'www.wikidata.org',
+		libParams: wdParams,
+	}));
+
 	await ployBot.deploy(configs);
 
 	// check bots

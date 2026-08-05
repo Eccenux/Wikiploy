@@ -6,7 +6,7 @@ import DeployConfig from './DeployConfig.js';
 
 import { promises as fs } from "fs";	// node v11+
 
-const version = /*version:main:*/'2.3.2'/*:main:version*/;
+const version = /*version:main:*/'2.4.0'/*:main:version*/;
 
 /**
  * MediaWiki deployment automation.
@@ -68,6 +68,9 @@ export default class WikiployLite extends WikiployBase {
 			// UA required for WMF wikis: https://meta.wikimedia.org/wiki/User-Agent_policy
 			userAgent: `Wikiploy ${version} ([[:en:Wikipedia:Wikiploy|Wikiploy]])`,
 		});
+		if (config.libParams) {
+			Object.assign(bot.options.defaultParams, config.libParams);
+		}
 		this._bots[site] = bot;
 		return bot;
 	}
