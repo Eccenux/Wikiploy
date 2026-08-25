@@ -66,10 +66,10 @@ The `setupSummary` function requires a `Wikiploy` bot object and optionally take
 
 - `ployBot`: A `Wikiploy` bot object. This is required to setup the `summary()` function.
 - `version` (optional): The version of your gadget. Defaults to an empty string if not provided.
-- `standardSummary` (optional): A string that provides a standard summary (aside from the version). Defaults to "changes from Github".
+- `standardSummary` (optional): A string that provides a standard summary (aside from the version). Defaults to "changes from GitHub".
 
 If your answer to the prompt would be: "fixed bug #123", you would get a full summary: "v5.6.0: fixed bug #123" (v${version}: ${summary}).
-For no answer you would get: "v5.6.0: changes from Github".
+For no answer you would get: "v5.6.0: changes from GitHub".
 
 #### Usage
 
@@ -154,7 +154,7 @@ You can change the default like so:
 ployBot.site = "en.wikipedia.org"; 
 ```
 
-You can also set a site for an indvidual `DeployConfig` like so:
+You can also set a site for an individual `DeployConfig` like so:
 ```js
 configs.push(new DeployConfig({
 	src: 'test.js',

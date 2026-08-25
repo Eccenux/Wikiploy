@@ -24,7 +24,7 @@ const userPrompt = (prompt) => {
  * @param {Number} version Gadget version.
  * @param {String} standardSummary Standard summary (aside from version).
  */
-async function setupSummary(ployBot, version = '', standardSummary = 'changes from Github') {
+async function setupSummary(ployBot, version = '', standardSummary = 'changes from GitHub') {
 	let info = version.length ? `(empty for a standard summary prefixed with v${version})` : `(empty for a standard summary)`;
 	let summary = await userPrompt(`Summary of changes ${info}:`);
 	if (typeof summary !== 'string' || !summary.length) {
